@@ -41,8 +41,6 @@
             margin: 28px auto;
         }
 
-        /* DASHBOARD */
-
         .dashboard {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -69,8 +67,6 @@
             font-weight: bold;
         }
 
-        /* CARD */
-
         .card {
             background: white;
             padding: 24px;
@@ -83,8 +79,6 @@
             margin-top: 0;
             margin-bottom: 20px;
         }
-
-        /* FORM */
 
         .form-grid {
             display: grid;
@@ -167,8 +161,6 @@
             background: #1d4ed8;
         }
 
-        /* FILTERS */
-
         .filters {
             display: grid;
             grid-template-columns: minmax(250px, 1fr) 180px 180px;
@@ -182,8 +174,6 @@
             width: 100%;
             min-width: 0;
         }
-
-        /* TABLE */
 
         .table-container {
             width: 100%;
@@ -218,8 +208,6 @@
             background: #f8fafc;
         }
 
-        /* INPUTS INSIDE TABLE */
-
         .edit-input {
             width: 100%;
             min-width: 95px;
@@ -227,7 +215,16 @@
             font-size: 13px;
         }
 
-        /* STATUS */
+        .edit-textarea {
+            width: 100%;
+            min-height: 90px;
+            padding: 9px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            resize: vertical;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+        }
 
         .status-badge {
             display: inline-block;
@@ -257,8 +254,6 @@
             background: #fee2e2;
             color: #991b1b;
         }
-
-        /* ACTIONS */
 
         .action-cell {
             width: 280px;
@@ -307,8 +302,6 @@
             opacity: 0.85;
         }
 
-        /* JOB URL */
-
         .job-link {
             color: #2563eb;
             text-decoration: none;
@@ -319,8 +312,6 @@
         .job-link:hover {
             text-decoration: underline;
         }
-
-        /* DETAILS */
 
         .details-row {
             display: none;
@@ -338,7 +329,9 @@
             min-width: 100px;
         }
 
-        /* RESPONSIVE */
+        .edit-details {
+            display: none;
+        }
 
         @media (max-width: 950px) {
             .dashboard {
@@ -395,8 +388,6 @@
 
 <div class="container">
 
-    <!-- DASHBOARD -->
-
     <div class="dashboard">
 
         <div class="dashboard-card">
@@ -426,9 +417,6 @@
 
     </div>
 
-
-    <!-- ADD APPLICATION -->
-
     <div class="card">
 
         <h2>Add Job Application</h2>
@@ -437,25 +425,17 @@
 
             <div class="form-group">
                 <label>Company <span class="required">*</span></label>
-                <input
-                    type="text"
-                    id="company"
-                    placeholder="e.g. TCS">
+                <input type="text" id="company" placeholder="e.g. TCS">
             </div>
 
             <div class="form-group">
                 <label>Job Role <span class="required">*</span></label>
-                <input
-                    type="text"
-                    id="role"
-                    placeholder="e.g. Java Developer">
+                <input type="text" id="role" placeholder="e.g. Java Developer">
             </div>
 
             <div class="form-group">
                 <label>Application Date <span class="required">*</span></label>
-                <input
-                    type="date"
-                    id="applicationDate">
+                <input type="date" id="applicationDate">
             </div>
 
             <div class="form-group">
@@ -472,10 +452,7 @@
             <div class="form-group">
                 <label>Location</label>
 
-                <input
-                    type="text"
-                    id="location"
-                    placeholder="e.g. Hyderabad">
+                <input type="text" id="location" placeholder="e.g. Hyderabad">
             </div>
 
             <div class="form-group">
@@ -519,20 +496,13 @@
 
         <div class="form-actions">
 
-            <button
-                class="add-btn"
-                onclick="addApplication()">
-
+            <button class="add-btn" onclick="addApplication()">
                 + Add Application
-
             </button>
 
         </div>
 
     </div>
-
-
-    <!-- APPLICATION LIST -->
 
     <div class="card">
 
@@ -572,7 +542,6 @@
 
         </div>
 
-
         <div class="table-container">
 
             <table>
@@ -602,7 +571,6 @@
     </div>
 
 </div>
-
 
 <script>
 
@@ -791,11 +759,13 @@ function displayApplications(applications) {
             </td>
 
             <td>
+
                 <input
                     class="edit-input"
                     id="location-${application.id}"
                     value="${escapeHtml(application.location)}"
                     disabled>
+
             </td>
 
             <td>
@@ -833,6 +803,13 @@ function displayApplications(applications) {
 
             <td>
 
+                <input
+                    class="edit-input"
+                    id="jobUrl-${application.id}"
+                    value="${escapeHtml(application.jobUrl)}"
+                    placeholder="Job URL"
+                    disabled>
+
                 ${
                     application.jobUrl
                     ?
@@ -843,7 +820,7 @@ function displayApplications(applications) {
                         Open
                     </a>`
                     :
-                    "Not added"
+                    ""
                 }
 
             </td>
@@ -911,37 +888,66 @@ function displayApplications(applications) {
 
             <td colspan="9">
 
-                <div class="details-content">
+                <div
+                    class="details-content"
+                    id="details-content-${application.id}">
 
-                    <strong>Job URL:</strong>
+                    <div id="normal-details-${application.id}">
 
-                    ${
-                        application.jobUrl
-                        ?
-                        `<a
-                            class="job-link"
-                            href="${escapeHtml(application.jobUrl)}"
-                            target="_blank">
-                            ${escapeHtml(application.jobUrl)}
-                        </a>`
-                        :
-                        "Not added"
-                    }
+                        <strong>Job URL:</strong>
 
-                    <br>
+                        ${
+                            application.jobUrl
+                            ?
+                            `<a
+                                class="job-link"
+                                href="${escapeHtml(application.jobUrl)}"
+                                target="_blank">
+                                ${escapeHtml(application.jobUrl)}
+                            </a>`
+                            :
+                            "Not added"
+                        }
 
-                    <strong>Location:</strong>
-                    ${escapeHtml(application.location || "Not added")}
+                        <br>
 
-                    <br>
+                        <strong>Location:</strong>
+                        ${escapeHtml(application.location || "Not added")}
 
-                    <strong>Job Type:</strong>
-                    ${escapeHtml(application.jobType || "Not added")}
+                        <br>
 
-                    <br>
+                        <strong>Job Type:</strong>
+                        ${escapeHtml(application.jobType || "Not added")}
 
-                    <strong>Notes:</strong>
-                    ${escapeHtml(application.notes || "No notes added")}
+                        <br>
+
+                        <strong>Notes:</strong>
+                        ${escapeHtml(application.notes || "No notes added")}
+
+                    </div>
+
+                    <div
+                        class="edit-details"
+                        id="edit-details-${application.id}">
+
+                        <strong>Job URL:</strong>
+
+                        <input
+                            class="edit-input"
+                            id="details-jobUrl-${application.id}"
+                            value="${escapeHtml(application.jobUrl)}"
+                            placeholder="Enter job URL">
+
+                        <br>
+
+                        <strong>Notes:</strong>
+
+                        <textarea
+                            class="edit-textarea"
+                            id="notes-${application.id}"
+                            placeholder="Add notes...">${escapeHtml(application.notes)}</textarea>
+
+                    </div>
 
                 </div>
 
@@ -1065,6 +1071,8 @@ function editApplication(id) {
 
     document.getElementById(`jobType-${id}`).disabled = false;
 
+    document.getElementById(`jobUrl-${id}`).disabled = false;
+
     document.getElementById(`status-display-${id}`).style.display = "none";
 
     document.getElementById(`status-${id}`).style.display = "block";
@@ -1078,6 +1086,23 @@ function editApplication(id) {
     document.getElementById(`save-${id}`).style.display = "inline-block";
 
     document.getElementById(`cancel-${id}`).style.display = "inline-block";
+
+
+    const details =
+        document.getElementById(`details-${id}`);
+
+    const normalDetails =
+        document.getElementById(`normal-details-${id}`);
+
+    const editDetails =
+        document.getElementById(`edit-details-${id}`);
+
+
+    details.style.display = "table-row";
+
+    normalDetails.style.display = "none";
+
+    editDetails.style.display = "block";
 
 }
 
@@ -1105,9 +1130,7 @@ async function saveApplication(id) {
             document.getElementById(`status-${id}`).value,
 
         jobUrl:
-            existingApplication
-                ? existingApplication.jobUrl || ""
-                : "",
+            document.getElementById(`jobUrl-${id}`).value.trim(),
 
         location:
             document.getElementById(`location-${id}`).value,
@@ -1116,11 +1139,17 @@ async function saveApplication(id) {
             document.getElementById(`jobType-${id}`).value,
 
         notes:
-            existingApplication
-                ? existingApplication.notes || ""
-                : ""
+            document.getElementById(`notes-${id}`).value.trim()
 
     };
+
+
+    if (!application.jobUrl) {
+
+        application.jobUrl =
+            document.getElementById(`details-jobUrl-${id}`).value.trim();
+
+    }
 
 
     try {
