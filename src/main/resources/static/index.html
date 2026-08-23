@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Job Application Tracker</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -41,6 +43,8 @@
             margin: 28px auto;
         }
 
+        /* DASHBOARD */
+
         .dashboard {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -67,6 +71,8 @@
             font-weight: bold;
         }
 
+        /* CARD */
+
         .card {
             background: white;
             padding: 24px;
@@ -79,6 +85,8 @@
             margin-top: 0;
             margin-bottom: 20px;
         }
+
+        /* FORM */
 
         .form-grid {
             display: grid;
@@ -142,6 +150,14 @@
             color: #6b7280;
         }
 
+        .validation-message {
+            display: none;
+            color: #dc2626;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 3px;
+        }
+
         .form-actions {
             margin-top: 20px;
         }
@@ -161,6 +177,8 @@
             background: #1d4ed8;
         }
 
+        /* FILTERS */
+
         .filters {
             display: grid;
             grid-template-columns: minmax(250px, 1fr) 180px 180px;
@@ -174,6 +192,8 @@
             width: 100%;
             min-width: 0;
         }
+
+        /* TABLE */
 
         .table-container {
             width: 100%;
@@ -208,6 +228,8 @@
             background: #f8fafc;
         }
 
+        /* EDIT INPUTS */
+
         .edit-input {
             width: 100%;
             min-width: 95px;
@@ -225,6 +247,8 @@
             font-family: Arial, sans-serif;
             font-size: 13px;
         }
+
+        /* STATUS */
 
         .status-badge {
             display: inline-block;
@@ -254,6 +278,8 @@
             background: #fee2e2;
             color: #991b1b;
         }
+
+        /* ACTIONS */
 
         .action-cell {
             width: 280px;
@@ -302,6 +328,8 @@
             opacity: 0.85;
         }
 
+        /* JOB URL */
+
         .job-link {
             color: #2563eb;
             text-decoration: none;
@@ -312,6 +340,8 @@
         .job-link:hover {
             text-decoration: underline;
         }
+
+        /* DETAILS */
 
         .details-row {
             display: none;
@@ -333,7 +363,10 @@
             display: none;
         }
 
+        /* RESPONSIVE */
+
         @media (max-width: 950px) {
+
             .dashboard {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -349,9 +382,11 @@
             .search-box {
                 grid-column: 1 / -1;
             }
+
         }
 
         @media (max-width: 600px) {
+
             .container {
                 width: 96%;
             }
@@ -375,97 +410,221 @@
             header h1 {
                 font-size: 24px;
             }
+
         }
+
     </style>
+
 </head>
 
 <body>
 
 <header>
+
     <h1>Job Application Tracker</h1>
-    <p>Manage and track your job applications easily</p>
+
+    <p>
+        Manage and track your job applications easily
+    </p>
+
 </header>
 
+
 <div class="container">
+
+
+    <!-- DASHBOARD -->
 
     <div class="dashboard">
 
         <div class="dashboard-card">
+
             <h3>Total Applications</h3>
+
             <p id="totalCount">0</p>
+
         </div>
 
+
         <div class="dashboard-card">
+
             <h3>Applied</h3>
+
             <p id="appliedCount">0</p>
+
         </div>
 
+
         <div class="dashboard-card">
+
             <h3>Interview</h3>
+
             <p id="interviewCount">0</p>
+
         </div>
 
+
         <div class="dashboard-card">
+
             <h3>Selected</h3>
+
             <p id="selectedCount">0</p>
+
         </div>
 
+
         <div class="dashboard-card">
+
             <h3>Rejected</h3>
+
             <p id="rejectedCount">0</p>
+
         </div>
 
     </div>
+
+
+    <!-- ADD APPLICATION -->
 
     <div class="card">
 
         <h2>Add Job Application</h2>
 
+
         <div class="form-grid">
 
-            <div class="form-group">
-                <label>Company <span class="required">*</span></label>
-                <input type="text" id="company" placeholder="e.g. TCS">
-            </div>
 
             <div class="form-group">
-                <label>Job Role <span class="required">*</span></label>
-                <input type="text" id="role" placeholder="e.g. Java Developer">
+
+                <label>
+                    Company
+                    <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="company"
+                    placeholder="e.g. TCS">
+
+                <span
+                    id="companyError"
+                    class="validation-message">
+                    Please enter a company name.
+                </span>
+
             </div>
 
-            <div class="form-group">
-                <label>Application Date <span class="required">*</span></label>
-                <input type="date" id="applicationDate">
-            </div>
 
             <div class="form-group">
+
+                <label>
+                    Job Role
+                    <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="role"
+                    placeholder="e.g. Java Developer">
+
+                <span
+                    id="roleError"
+                    class="validation-message">
+                    Please enter a job role.
+                </span>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Application Date
+                    <span class="required">*</span>
+                </label>
+
+                <input
+                    type="date"
+                    id="applicationDate">
+
+                <span
+                    id="dateError"
+                    class="validation-message">
+                    Please enter a valid application date.
+                </span>
+
+            </div>
+
+
+            <div class="form-group">
+
                 <label>Status</label>
 
                 <select id="status">
-                    <option value="Applied">Applied</option>
-                    <option value="Interview">Interview</option>
-                    <option value="Selected">Selected</option>
-                    <option value="Rejected">Rejected</option>
+
+                    <option value="Applied">
+                        Applied
+                    </option>
+
+                    <option value="Interview">
+                        Interview
+                    </option>
+
+                    <option value="Selected">
+                        Selected
+                    </option>
+
+                    <option value="Rejected">
+                        Rejected
+                    </option>
+
                 </select>
+
             </div>
 
+
             <div class="form-group">
+
                 <label>Location</label>
 
-                <input type="text" id="location" placeholder="e.g. Hyderabad">
+                <input
+                    type="text"
+                    id="location"
+                    placeholder="e.g. Hyderabad">
+
             </div>
 
+
             <div class="form-group">
+
                 <label>Job Type</label>
 
                 <select id="jobType">
-                    <option value="">Select Job Type</option>
-                    <option value="Full-time">Full-time</option>
-                    <option value="Internship">Internship</option>
-                    <option value="Contract">Contract</option>
-                    <option value="Part-time">Part-time</option>
+
+                    <option value="">
+                        Select Job Type
+                    </option>
+
+                    <option value="Full-time">
+                        Full-time
+                    </option>
+
+                    <option value="Internship">
+                        Internship
+                    </option>
+
+                    <option value="Contract">
+                        Contract
+                    </option>
+
+                    <option value="Part-time">
+                        Part-time
+                    </option>
+
                 </select>
+
             </div>
+
 
             <div class="form-group full">
 
@@ -480,7 +639,14 @@
                     Paste the job posting URL so you can open it later.
                 </span>
 
+                <span
+                    id="urlError"
+                    class="validation-message">
+                    Please enter a valid URL starting with http:// or https://
+                </span>
+
             </div>
+
 
             <div class="form-group full">
 
@@ -494,19 +660,28 @@
 
         </div>
 
+
         <div class="form-actions">
 
-            <button class="add-btn" onclick="addApplication()">
+            <button
+                class="add-btn"
+                onclick="addApplication()">
+
                 + Add Application
+
             </button>
 
         </div>
 
     </div>
 
+
+    <!-- APPLICATION LIST -->
+
     <div class="card">
 
         <h2>My Applications</h2>
+
 
         <div class="filters">
 
@@ -517,30 +692,52 @@
                 placeholder="Search by company or job role..."
                 oninput="filterApplications()">
 
+
             <select
                 id="statusFilter"
                 class="filter-select"
                 onchange="filterApplications()">
 
-                <option value="All">All Status</option>
-                <option value="Applied">Applied</option>
-                <option value="Interview">Interview</option>
-                <option value="Selected">Selected</option>
-                <option value="Rejected">Rejected</option>
+                <option value="All">
+                    All Status
+                </option>
+
+                <option value="Applied">
+                    Applied
+                </option>
+
+                <option value="Interview">
+                    Interview
+                </option>
+
+                <option value="Selected">
+                    Selected
+                </option>
+
+                <option value="Rejected">
+                    Rejected
+                </option>
 
             </select>
+
 
             <select
                 id="sortFilter"
                 class="sort-select"
                 onchange="filterApplications()">
 
-                <option value="newest">Newest First</option>
-                <option value="oldest">Oldest First</option>
+                <option value="newest">
+                    Newest First
+                </option>
+
+                <option value="oldest">
+                    Oldest First
+                </option>
 
             </select>
 
         </div>
+
 
         <div class="table-container">
 
@@ -549,18 +746,29 @@
                 <thead>
 
                     <tr>
+
                         <th>ID</th>
+
                         <th>Company</th>
+
                         <th>Role</th>
+
                         <th>Date</th>
+
                         <th>Status</th>
+
                         <th>Location</th>
+
                         <th>Job Type</th>
+
                         <th>Job URL</th>
+
                         <th>Actions</th>
+
                     </tr>
 
                 </thead>
+
 
                 <tbody id="applicationTable"></tbody>
 
@@ -572,34 +780,50 @@
 
 </div>
 
+
 <script>
+
 
 const API_URL = "/api/applications";
 
 let allApplications = [];
 
 
-/* LOAD */
+/* LOAD APPLICATIONS */
 
 async function loadApplications() {
 
     try {
 
-        const response = await fetch(API_URL);
+        const response =
+            await fetch(API_URL);
+
 
         if (!response.ok) {
-            throw new Error("Failed to load applications");
+
+            throw new Error(
+                "Failed to load applications"
+            );
+
         }
 
-        allApplications = await response.json();
+
+        allApplications =
+            await response.json();
+
 
         updateDashboard();
+
         filterApplications();
+
 
     } catch (error) {
 
         console.error(error);
-        alert("Unable to load applications.");
+
+        alert(
+            "Unable to load applications. Please make sure the server is running."
+        );
 
     }
 
@@ -613,20 +837,24 @@ function updateDashboard() {
     document.getElementById("totalCount").textContent =
         allApplications.length;
 
+
     document.getElementById("appliedCount").textContent =
         allApplications.filter(
             app => app.status === "Applied"
         ).length;
+
 
     document.getElementById("interviewCount").textContent =
         allApplications.filter(
             app => app.status === "Interview"
         ).length;
 
+
     document.getElementById("selectedCount").textContent =
         allApplications.filter(
             app => app.status === "Selected"
         ).length;
+
 
     document.getElementById("rejectedCount").textContent =
         allApplications.filter(
@@ -650,83 +878,268 @@ function escapeHtml(value) {
 }
 
 
-/* STATUS */
+/* STATUS CLASS */
 
 function getStatusClass(status) {
 
     if (status === "Applied") {
+
         return "status-applied";
+
     }
+
 
     if (status === "Interview") {
+
         return "status-interview";
+
     }
+
 
     if (status === "Selected") {
+
         return "status-selected";
+
     }
 
+
     if (status === "Rejected") {
+
         return "status-rejected";
+
     }
+
 
     return "";
 
 }
 
 
-/* DISPLAY */
+/* VALIDATION */
+
+function validateApplicationForm() {
+
+    let isValid = true;
+
+
+    const company =
+        document.getElementById("company")
+            .value
+            .trim();
+
+
+    const role =
+        document.getElementById("role")
+            .value
+            .trim();
+
+
+    const applicationDate =
+        document.getElementById("applicationDate")
+            .value;
+
+
+    const jobUrl =
+        document.getElementById("jobUrl")
+            .value
+            .trim();
+
+
+    const companyError =
+        document.getElementById("companyError");
+
+
+    const roleError =
+        document.getElementById("roleError");
+
+
+    const dateError =
+        document.getElementById("dateError");
+
+
+    const urlError =
+        document.getElementById("urlError");
+
+
+    companyError.style.display = "none";
+
+    roleError.style.display = "none";
+
+    dateError.style.display = "none";
+
+    urlError.style.display = "none";
+
+
+    /* COMPANY */
+
+    if (!company) {
+
+        companyError.style.display = "block";
+
+        isValid = false;
+
+    }
+
+
+    /* ROLE */
+
+    if (!role) {
+
+        roleError.style.display = "block";
+
+        isValid = false;
+
+    }
+
+
+    /* DATE */
+
+    if (!applicationDate) {
+
+        dateError.textContent =
+            "Please enter an application date.";
+
+        dateError.style.display = "block";
+
+        isValid = false;
+
+    } else {
+
+        const today =
+            new Date();
+
+        today.setHours(0, 0, 0, 0);
+
+
+        const selectedDate =
+            new Date(applicationDate);
+
+        selectedDate.setHours(0, 0, 0, 0);
+
+
+        if (selectedDate > today) {
+
+            dateError.textContent =
+                "Application date cannot be in the future.";
+
+            dateError.style.display = "block";
+
+            isValid = false;
+
+        }
+
+    }
+
+
+    /* JOB URL */
+
+    if (jobUrl) {
+
+        try {
+
+            const url =
+                new URL(jobUrl);
+
+
+            if (
+                url.protocol !== "http:" &&
+                url.protocol !== "https:"
+            ) {
+
+                throw new Error();
+
+            }
+
+        } catch {
+
+            urlError.style.display = "block";
+
+            isValid = false;
+
+        }
+
+    }
+
+
+    return isValid;
+
+}
+
+
+/* DISPLAY APPLICATIONS */
 
 function displayApplications(applications) {
 
     const table =
-        document.getElementById("applicationTable");
+        document.getElementById(
+            "applicationTable"
+        );
+
 
     table.innerHTML = "";
 
 
     applications.forEach(application => {
 
-        const row = document.createElement("tr");
+        const row =
+            document.createElement("tr");
+
 
         row.innerHTML = `
 
-            <td>${application.id}</td>
+            <td>
+                ${application.id}
+            </td>
+
 
             <td>
+
                 <input
                     class="edit-input"
                     id="company-${application.id}"
                     value="${escapeHtml(application.company)}"
                     disabled>
+
             </td>
 
+
             <td>
+
                 <input
                     class="edit-input"
                     id="role-${application.id}"
                     value="${escapeHtml(application.role)}"
                     disabled>
+
             </td>
 
+
             <td>
+
                 <input
                     class="edit-input"
                     type="date"
                     id="date-${application.id}"
                     value="${application.applicationDate || ""}"
                     disabled>
+
             </td>
+
 
             <td>
 
-                <div id="status-display-${application.id}">
+                <div
+                    id="status-display-${application.id}">
 
-                    <span class="status-badge ${getStatusClass(application.status)}">
+                    <span
+                        class="status-badge ${getStatusClass(application.status)}">
+
                         ${escapeHtml(application.status)}
+
                     </span>
 
                 </div>
+
 
                 <select
                     class="edit-input"
@@ -734,22 +1147,29 @@ function displayApplications(applications) {
                     disabled
                     style="display:none;">
 
-                    <option value="Applied"
+                    <option
+                        value="Applied"
                         ${application.status === "Applied" ? "selected" : ""}>
                         Applied
                     </option>
 
-                    <option value="Interview"
+
+                    <option
+                        value="Interview"
                         ${application.status === "Interview" ? "selected" : ""}>
                         Interview
                     </option>
 
-                    <option value="Selected"
+
+                    <option
+                        value="Selected"
                         ${application.status === "Selected" ? "selected" : ""}>
                         Selected
                     </option>
 
-                    <option value="Rejected"
+
+                    <option
+                        value="Rejected"
                         ${application.status === "Rejected" ? "selected" : ""}>
                         Rejected
                     </option>
@@ -757,6 +1177,7 @@ function displayApplications(applications) {
                 </select>
 
             </td>
+
 
             <td>
 
@@ -768,6 +1189,7 @@ function displayApplications(applications) {
 
             </td>
 
+
             <td>
 
                 <select
@@ -775,24 +1197,34 @@ function displayApplications(applications) {
                     id="jobType-${application.id}"
                     disabled>
 
-                    <option value="">Select</option>
+                    <option value="">
+                        Select
+                    </option>
 
-                    <option value="Full-time"
+
+                    <option
+                        value="Full-time"
                         ${application.jobType === "Full-time" ? "selected" : ""}>
                         Full-time
                     </option>
 
-                    <option value="Internship"
+
+                    <option
+                        value="Internship"
                         ${application.jobType === "Internship" ? "selected" : ""}>
                         Internship
                     </option>
 
-                    <option value="Contract"
+
+                    <option
+                        value="Contract"
                         ${application.jobType === "Contract" ? "selected" : ""}>
                         Contract
                     </option>
 
-                    <option value="Part-time"
+
+                    <option
+                        value="Part-time"
                         ${application.jobType === "Part-time" ? "selected" : ""}>
                         Part-time
                     </option>
@@ -800,6 +1232,7 @@ function displayApplications(applications) {
                 </select>
 
             </td>
+
 
             <td>
 
@@ -810,6 +1243,7 @@ function displayApplications(applications) {
                     placeholder="Job URL"
                     disabled>
 
+
                 ${
                     application.jobUrl
                     ?
@@ -817,13 +1251,16 @@ function displayApplications(applications) {
                         class="job-link"
                         href="${escapeHtml(application.jobUrl)}"
                         target="_blank">
+
                         Open
+
                     </a>`
                     :
                     ""
                 }
 
             </td>
+
 
             <td class="action-cell">
 
@@ -833,36 +1270,50 @@ function displayApplications(applications) {
                         class="view-btn"
                         id="view-${application.id}"
                         onclick="toggleDetails(${application.id})">
+
                         Details
+
                     </button>
+
 
                     <button
                         class="edit-btn"
                         id="edit-${application.id}"
                         onclick="editApplication(${application.id})">
+
                         Edit
+
                     </button>
+
 
                     <button
                         class="save-btn"
                         id="save-${application.id}"
                         onclick="saveApplication(${application.id})"
                         style="display:none;">
+
                         Save
+
                     </button>
+
 
                     <button
                         class="cancel-btn"
                         id="cancel-${application.id}"
                         onclick="loadApplications()"
                         style="display:none;">
+
                         Cancel
+
                     </button>
+
 
                     <button
                         class="delete-btn"
                         onclick="deleteApplication(${application.id})">
+
                         Delete
+
                     </button>
 
                 </div>
@@ -870,6 +1321,7 @@ function displayApplications(applications) {
             </td>
 
         `;
+
 
         table.appendChild(row);
 
@@ -879,10 +1331,14 @@ function displayApplications(applications) {
         const detailsRow =
             document.createElement("tr");
 
-        detailsRow.className = "details-row";
+
+        detailsRow.className =
+            "details-row";
+
 
         detailsRow.id =
             `details-${application.id}`;
+
 
         detailsRow.innerHTML = `
 
@@ -892,9 +1348,14 @@ function displayApplications(applications) {
                     class="details-content"
                     id="details-content-${application.id}">
 
-                    <div id="normal-details-${application.id}">
 
-                        <strong>Job URL:</strong>
+                    <div
+                        id="normal-details-${application.id}">
+
+                        <strong>
+                            Job URL:
+                        </strong>
+
 
                         ${
                             application.jobUrl
@@ -903,34 +1364,65 @@ function displayApplications(applications) {
                                 class="job-link"
                                 href="${escapeHtml(application.jobUrl)}"
                                 target="_blank">
+
                                 ${escapeHtml(application.jobUrl)}
+
                             </a>`
                             :
                             "Not added"
                         }
 
-                        <br>
-
-                        <strong>Location:</strong>
-                        ${escapeHtml(application.location || "Not added")}
 
                         <br>
 
-                        <strong>Job Type:</strong>
-                        ${escapeHtml(application.jobType || "Not added")}
+
+                        <strong>
+                            Location:
+                        </strong>
+
+                        ${escapeHtml(
+                            application.location ||
+                            "Not added"
+                        )}
+
 
                         <br>
 
-                        <strong>Notes:</strong>
-                        ${escapeHtml(application.notes || "No notes added")}
+
+                        <strong>
+                            Job Type:
+                        </strong>
+
+                        ${escapeHtml(
+                            application.jobType ||
+                            "Not added"
+                        )}
+
+
+                        <br>
+
+
+                        <strong>
+                            Notes:
+                        </strong>
+
+                        ${escapeHtml(
+                            application.notes ||
+                            "No notes added"
+                        )}
 
                     </div>
+
 
                     <div
                         class="edit-details"
                         id="edit-details-${application.id}">
 
-                        <strong>Job URL:</strong>
+
+                        <strong>
+                            Job URL:
+                        </strong>
+
 
                         <input
                             class="edit-input"
@@ -938,9 +1430,14 @@ function displayApplications(applications) {
                             value="${escapeHtml(application.jobUrl)}"
                             placeholder="Enter job URL">
 
+
                         <br>
 
-                        <strong>Notes:</strong>
+
+                        <strong>
+                            Notes:
+                        </strong>
+
 
                         <textarea
                             class="edit-textarea"
@@ -955,6 +1452,7 @@ function displayApplications(applications) {
 
         `;
 
+
         table.appendChild(detailsRow);
 
     });
@@ -962,43 +1460,60 @@ function displayApplications(applications) {
 }
 
 
-/* ADD */
+/* ADD APPLICATION */
 
 async function addApplication() {
 
-    const company =
-        document.getElementById("company").value.trim();
-
-    const role =
-        document.getElementById("role").value.trim();
-
-    const applicationDate =
-        document.getElementById("applicationDate").value;
-
-    const status =
-        document.getElementById("status").value;
-
-    const jobUrl =
-        document.getElementById("jobUrl").value.trim();
-
-    const location =
-        document.getElementById("location").value.trim();
-
-    const jobType =
-        document.getElementById("jobType").value;
-
-    const notes =
-        document.getElementById("notes").value.trim();
-
-
-    if (!company || !role || !applicationDate) {
-
-        alert(
-            "Please fill Company, Job Role and Application Date."
-        );
+    if (!validateApplicationForm()) {
 
         return;
+
     }
+
+
+    const company =
+        document.getElementById("company")
+            .value
+            .trim();
+
+
+    const role =
+        document.getElementById("role")
+            .value
+            .trim();
+
+
+    const applicationDate =
+        document.getElementById("applicationDate")
+            .value;
+
+
+    const status =
+        document.getElementById("status")
+            .value;
+
+
+    const jobUrl =
+        document.getElementById("jobUrl")
+            .value
+            .trim();
+
+
+    const location =
+        document.getElementById("location")
+            .value
+            .trim();
+
+
+    const jobType =
+        document.getElementById("jobType")
+            .value;
+
+
+    const notes =
+        document.getElementById("notes")
+            .value
+            .trim();
 
 
     const application = {
@@ -1017,137 +1532,322 @@ async function addApplication() {
 
     try {
 
-        const response = await fetch(API_URL, {
+        const response =
+            await fetch(
+                API_URL,
+                {
 
-            method: "POST",
+                    method: "POST",
 
-            headers: {
-                "Content-Type": "application/json"
-            },
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
 
-            body: JSON.stringify(application)
+                    body:
+                        JSON.stringify(
+                            application
+                        )
 
-        });
+                }
+            );
 
 
         if (!response.ok) {
-            throw new Error("Failed to add application");
+
+            throw new Error(
+                "Failed to add application"
+            );
+
         }
 
 
-        document.getElementById("company").value = "";
-        document.getElementById("role").value = "";
-        document.getElementById("applicationDate").value = "";
-        document.getElementById("status").value = "Applied";
-        document.getElementById("jobUrl").value = "";
-        document.getElementById("location").value = "";
-        document.getElementById("jobType").value = "";
-        document.getElementById("notes").value = "";
+        document.getElementById("company")
+            .value = "";
+
+
+        document.getElementById("role")
+            .value = "";
+
+
+        document.getElementById("applicationDate")
+            .value = "";
+
+
+        document.getElementById("status")
+            .value = "Applied";
+
+
+        document.getElementById("jobUrl")
+            .value = "";
+
+
+        document.getElementById("location")
+            .value = "";
+
+
+        document.getElementById("jobType")
+            .value = "";
+
+
+        document.getElementById("notes")
+            .value = "";
 
 
         await loadApplications();
 
+
     } catch (error) {
 
         console.error(error);
-        alert("Unable to add application.");
+
+
+        alert(
+            "Unable to add application. Please make sure the server is running."
+        );
 
     }
 
 }
 
 
-/* EDIT */
+/* EDIT APPLICATION */
 
 function editApplication(id) {
 
-    document.getElementById(`company-${id}`).disabled = false;
+    document.getElementById(
+        `company-${id}`
+    ).disabled = false;
 
-    document.getElementById(`role-${id}`).disabled = false;
 
-    document.getElementById(`date-${id}`).disabled = false;
+    document.getElementById(
+        `role-${id}`
+    ).disabled = false;
 
-    document.getElementById(`location-${id}`).disabled = false;
 
-    document.getElementById(`jobType-${id}`).disabled = false;
+    document.getElementById(
+        `date-${id}`
+    ).disabled = false;
 
-    document.getElementById(`jobUrl-${id}`).disabled = false;
 
-    document.getElementById(`status-display-${id}`).style.display = "none";
+    document.getElementById(
+        `location-${id}`
+    ).disabled = false;
 
-    document.getElementById(`status-${id}`).style.display = "block";
 
-    document.getElementById(`status-${id}`).disabled = false;
+    document.getElementById(
+        `jobType-${id}`
+    ).disabled = false;
 
-    document.getElementById(`edit-${id}`).style.display = "none";
 
-    document.getElementById(`view-${id}`).style.display = "none";
+    document.getElementById(
+        `jobUrl-${id}`
+    ).disabled = false;
 
-    document.getElementById(`save-${id}`).style.display = "inline-block";
 
-    document.getElementById(`cancel-${id}`).style.display = "inline-block";
+    document.getElementById(
+        `status-display-${id}`
+    ).style.display = "none";
+
+
+    document.getElementById(
+        `status-${id}`
+    ).style.display = "block";
+
+
+    document.getElementById(
+        `status-${id}`
+    ).disabled = false;
+
+
+    document.getElementById(
+        `edit-${id}`
+    ).style.display = "none";
+
+
+    document.getElementById(
+        `view-${id}`
+    ).style.display = "none";
+
+
+    document.getElementById(
+        `save-${id}`
+    ).style.display = "inline-block";
+
+
+    document.getElementById(
+        `cancel-${id}`
+    ).style.display = "inline-block";
 
 
     const details =
-        document.getElementById(`details-${id}`);
+        document.getElementById(
+            `details-${id}`
+        );
+
 
     const normalDetails =
-        document.getElementById(`normal-details-${id}`);
+        document.getElementById(
+            `normal-details-${id}`
+        );
+
 
     const editDetails =
-        document.getElementById(`edit-details-${id}`);
+        document.getElementById(
+            `edit-details-${id}`
+        );
 
 
-    details.style.display = "table-row";
+    details.style.display =
+        "table-row";
 
-    normalDetails.style.display = "none";
 
-    editDetails.style.display = "block";
+    normalDetails.style.display =
+        "none";
+
+
+    editDetails.style.display =
+        "block";
 
 }
 
 
-/* SAVE */
+/* SAVE APPLICATION */
 
 async function saveApplication(id) {
-
-    const existingApplication =
-        allApplications.find(app => app.id === id);
-
 
     const application = {
 
         company:
-            document.getElementById(`company-${id}`).value,
+            document.getElementById(
+                `company-${id}`
+            ).value.trim(),
+
 
         role:
-            document.getElementById(`role-${id}`).value,
+            document.getElementById(
+                `role-${id}`
+            ).value.trim(),
+
 
         applicationDate:
-            document.getElementById(`date-${id}`).value,
+            document.getElementById(
+                `date-${id}`
+            ).value,
+
 
         status:
-            document.getElementById(`status-${id}`).value,
+            document.getElementById(
+                `status-${id}`
+            ).value,
+
 
         jobUrl:
-            document.getElementById(`jobUrl-${id}`).value.trim(),
+            document.getElementById(
+                `jobUrl-${id}`
+            ).value.trim(),
+
 
         location:
-            document.getElementById(`location-${id}`).value,
+            document.getElementById(
+                `location-${id}`
+            ).value.trim(),
+
 
         jobType:
-            document.getElementById(`jobType-${id}`).value,
+            document.getElementById(
+                `jobType-${id}`
+            ).value,
+
 
         notes:
-            document.getElementById(`notes-${id}`).value.trim()
+            document.getElementById(
+                `notes-${id}`
+            ).value.trim()
 
     };
 
 
-    if (!application.jobUrl) {
+    /* EDIT VALIDATION */
 
-        application.jobUrl =
-            document.getElementById(`details-jobUrl-${id}`).value.trim();
+    if (
+        !application.company ||
+        !application.role ||
+        !application.applicationDate
+    ) {
+
+        alert(
+            "Company, Job Role and Application Date are required."
+        );
+
+        return;
+
+    }
+
+
+    const today =
+        new Date();
+
+    today.setHours(
+        0,
+        0,
+        0,
+        0
+    );
+
+
+    const selectedDate =
+        new Date(
+            application.applicationDate
+        );
+
+    selectedDate.setHours(
+        0,
+        0,
+        0,
+        0
+    );
+
+
+    if (selectedDate > today) {
+
+        alert(
+            "Application date cannot be in the future."
+        );
+
+        return;
+
+    }
+
+
+    if (application.jobUrl) {
+
+        try {
+
+            const url =
+                new URL(
+                    application.jobUrl
+                );
+
+
+            if (
+                url.protocol !== "http:" &&
+                url.protocol !== "https:"
+            ) {
+
+                throw new Error();
+
+            }
+
+        } catch {
+
+            alert(
+                "Please enter a valid job URL starting with http:// or https://"
+            );
+
+            return;
+
+        }
 
     }
 
@@ -1155,30 +1855,46 @@ async function saveApplication(id) {
     try {
 
         const response =
-            await fetch(`${API_URL}/${id}`, {
+            await fetch(
+                `${API_URL}/${id}`,
+                {
 
-                method: "PUT",
+                    method: "PUT",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
 
-                body: JSON.stringify(application)
+                    body:
+                        JSON.stringify(
+                            application
+                        )
 
-            });
+                }
+            );
 
 
         if (!response.ok) {
-            throw new Error("Failed to update application");
+
+            throw new Error(
+                "Failed to update application"
+            );
+
         }
 
 
         await loadApplications();
 
+
     } catch (error) {
 
         console.error(error);
-        alert("Unable to update application.");
+
+
+        alert(
+            "Unable to update application. Please make sure the server is running."
+        );
 
     }
 
@@ -1194,29 +1910,43 @@ async function deleteApplication(id) {
             "Are you sure you want to delete this application?"
         )
     ) {
+
         return;
+
     }
 
 
     try {
 
         const response =
-            await fetch(`${API_URL}/${id}`, {
-                method: "DELETE"
-            });
+            await fetch(
+                `${API_URL}/${id}`,
+                {
+                    method: "DELETE"
+                }
+            );
 
 
         if (!response.ok) {
-            throw new Error("Failed to delete application");
+
+            throw new Error(
+                "Failed to delete application"
+            );
+
         }
 
 
         await loadApplications();
 
+
     } catch (error) {
 
         console.error(error);
-        alert("Unable to delete application.");
+
+
+        alert(
+            "Unable to delete application."
+        );
 
     }
 
@@ -1228,23 +1958,38 @@ async function deleteApplication(id) {
 function toggleDetails(id) {
 
     const details =
-        document.getElementById(`details-${id}`);
+        document.getElementById(
+            `details-${id}`
+        );
+
 
     const button =
-        document.getElementById(`view-${id}`);
+        document.getElementById(
+            `view-${id}`
+        );
 
 
-    if (details.style.display === "table-row") {
+    if (
+        details.style.display ===
+        "table-row"
+    ) {
 
-        details.style.display = "none";
+        details.style.display =
+            "none";
 
-        button.textContent = "Details";
+
+        button.textContent =
+            "Details";
+
 
     } else {
 
-        details.style.display = "table-row";
+        details.style.display =
+            "table-row";
 
-        button.textContent = "Hide Details";
+
+        button.textContent =
+            "Hide Details";
 
     }
 
@@ -1256,66 +2001,105 @@ function toggleDetails(id) {
 function filterApplications() {
 
     const searchText =
-        document.getElementById("searchInput")
-            .value
-            .trim()
-            .toLowerCase();
+        document.getElementById(
+            "searchInput"
+        )
+        .value
+        .trim()
+        .toLowerCase();
 
 
     const selectedStatus =
-        document.getElementById("statusFilter").value;
+        document.getElementById(
+            "statusFilter"
+        ).value;
 
 
     const selectedSort =
-        document.getElementById("sortFilter").value;
+        document.getElementById(
+            "sortFilter"
+        ).value;
 
 
     let filteredApplications =
-        allApplications.filter(application => {
+        allApplications.filter(
+            application => {
 
-            const company =
-                String(application.company || "")
+                const company =
+                    String(
+                        application.company ||
+                        ""
+                    )
                     .toLowerCase();
 
-            const role =
-                String(application.role || "")
+
+                const role =
+                    String(
+                        application.role ||
+                        ""
+                    )
                     .toLowerCase();
 
 
-            const matchesSearch =
-                company.includes(searchText) ||
-                role.includes(searchText);
+                const matchesSearch =
+                    company.includes(
+                        searchText
+                    ) ||
+                    role.includes(
+                        searchText
+                    );
 
 
-            const matchesStatus =
-                selectedStatus === "All" ||
-                application.status === selectedStatus;
+                const matchesStatus =
+                    selectedStatus ===
+                    "All" ||
+                    application.status ===
+                    selectedStatus;
 
 
-            return matchesSearch && matchesStatus;
+                return (
+                    matchesSearch &&
+                    matchesStatus
+                );
 
-        });
-
-
-    filteredApplications.sort((a, b) => {
-
-        const dateA =
-            new Date(a.applicationDate);
-
-        const dateB =
-            new Date(b.applicationDate);
+            }
+        );
 
 
-        if (selectedSort === "newest") {
-            return dateB - dateA;
+    filteredApplications.sort(
+        (a, b) => {
+
+            const dateA =
+                new Date(
+                    a.applicationDate
+                );
+
+
+            const dateB =
+                new Date(
+                    b.applicationDate
+                );
+
+
+            if (
+                selectedSort ===
+                "newest"
+            ) {
+
+                return dateB - dateA;
+
+            }
+
+
+            return dateA - dateB;
+
         }
-
-        return dateA - dateB;
-
-    });
+    );
 
 
-    displayApplications(filteredApplications);
+    displayApplications(
+        filteredApplications
+    );
 
 }
 
