@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Tracker</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 28px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        header p {
+            margin: 8px 0 0;
+            opacity: 0.85;
+        }
+
+        .container {
+            width: 94%;
+            max-width: 1400px;
+            margin: 28px auto;
+        }
+
+        /* DASHBOARD */
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .dashboard-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .dashboard-card h3 {
+            margin: 0 0 10px;
+            font-size: 14px;
+        }
+
+        .dashboard-card p {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        /* CARD */
+
+        .card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        /* FORM */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #374151;
+        }
+
+        .required {
+            color: #dc2626;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            background: white;
+            color: #1f2937;
+            outline: none;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #94a3b8;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.10);
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .form-help {
+            font-size: 11px;
+            color: #6b7280;
+        }
+
+        .form-actions {
+            margin-top: 20px;
+        }
+
+        .add-btn {
+            background: #2563eb;
+            padding: 11px 20px;
+            border: none;
+            border-radius: 7px;
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* FILTERS */
+
+        .filters {
+            display: grid;
+            grid-template-columns: minmax(250px, 1fr) 180px 180px;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .search-box,
+        .filter-select,
+        .sort-select {
+            width: 100%;
+            min-width: 0;
+        }
+
+        /* TABLE */
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            min-width: 1250px;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f1f5f9;
+            padding: 14px 12px;
+            text-align: left;
+            font-size: 13px;
+            white-space: nowrap;
+            color: #334155;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 13px;
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        /* INPUTS INSIDE TABLE */
+
+        .edit-input {
+            width: 100%;
+            min-width: 95px;
+            padding: 8px 9px;
+            font-size: 13px;
+        }
+
+        /* STATUS */
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 11px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .status-applied {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-interview {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status-selected {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* ACTIONS */
+
+        .action-cell {
+            width: 280px;
+            min-width: 280px;
+        }
+
+        .action-buttons {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            flex-wrap: wrap;
+        }
+
+        .action-buttons button {
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            min-width: 68px;
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .view-btn {
+            background: #0891b2;
+        }
+
+        .edit-btn {
+            background: #16a34a;
+        }
+
+        .save-btn {
+            background: #7c3aed;
+        }
+
+        .cancel-btn {
+            background: #6b7280;
+        }
+
+        .delete-btn {
+            background: #dc2626;
+        }
+
+        .action-buttons button:hover {
+            opacity: 0.85;
+        }
+
+        /* JOB URL */
+
+        .job-link {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .job-link:hover {
+            text-decoration: underline;
+        }
+
+        /* DETAILS */
+
+        .details-row {
+            display: none;
+            background: #f8fafc;
+        }
+
+        .details-content {
+            padding: 18px;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .details-content strong {
+            display: inline-block;
+            min-width: 100px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 950px) {
+            .dashboard {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filters {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .search-box {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 96%;
+            }
+
+            .dashboard {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+            .search-box {
+                grid-column: auto;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Job Application Tracker</h1>
+    <p>Manage and track your job applications easily</p>
+</header>
+
+<div class="container">
+
+    <!-- DASHBOARD -->
+
+    <div class="dashboard">
+
+        <div class="dashboard-card">
+            <h3>Total Applications</h3>
+            <p id="totalCount">0</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Applied</h3>
+            <p id="appliedCount">0</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Interview</h3>
+            <p id="interviewCount">0</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Selected</h3>
+            <p id="selectedCount">0</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Rejected</h3>
+            <p id="rejectedCount">0</p>
+        </div>
+
+    </div>
+
+
+    <!-- ADD APPLICATION -->
+
+    <div class="card">
+
+        <h2>Add Job Application</h2>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Company <span class="required">*</span></label>
+                <input
+                    type="text"
+                    id="company"
+                    placeholder="e.g. TCS">
+            </div>
+
+            <div class="form-group">
+                <label>Job Role <span class="required">*</span></label>
+                <input
+                    type="text"
+                    id="role"
+                    placeholder="e.g. Java Developer">
+            </div>
+
+            <div class="form-group">
+                <label>Application Date <span class="required">*</span></label>
+                <input
+                    type="date"
+                    id="applicationDate">
+            </div>
+
+            <div class="form-group">
+                <label>Status</label>
+
+                <select id="status">
+                    <option value="Applied">Applied</option>
+                    <option value="Interview">Interview</option>
+                    <option value="Selected">Selected</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Location</label>
+
+                <input
+                    type="text"
+                    id="location"
+                    placeholder="e.g. Hyderabad">
+            </div>
+
+            <div class="form-group">
+                <label>Job Type</label>
+
+                <select id="jobType">
+                    <option value="">Select Job Type</option>
+                    <option value="Full-time">Full-time</option>
+                    <option value="Internship">Internship</option>
+                    <option value="Contract">Contract</option>
+                    <option value="Part-time">Part-time</option>
+                </select>
+            </div>
+
+            <div class="form-group full">
+
+                <label>Job URL</label>
+
+                <input
+                    type="url"
+                    id="jobUrl"
+                    placeholder="https://company.com/job">
+
+                <span class="form-help">
+                    Paste the job posting URL so you can open it later.
+                </span>
+
+            </div>
+
+            <div class="form-group full">
+
+                <label>Notes</label>
+
+                <textarea
+                    id="notes"
+                    placeholder="Add interview notes, recruiter details, preparation notes, etc."></textarea>
+
+            </div>
+
+        </div>
+
+        <div class="form-actions">
+
+            <button
+                class="add-btn"
+                onclick="addApplication()">
+
+                + Add Application
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- APPLICATION LIST -->
+
+    <div class="card">
+
+        <h2>My Applications</h2>
+
+        <div class="filters">
+
+            <input
+                type="text"
+                id="searchInput"
+                class="search-box"
+                placeholder="Search by company or job role..."
+                oninput="filterApplications()">
+
+            <select
+                id="statusFilter"
+                class="filter-select"
+                onchange="filterApplications()">
+
+                <option value="All">All Status</option>
+                <option value="Applied">Applied</option>
+                <option value="Interview">Interview</option>
+                <option value="Selected">Selected</option>
+                <option value="Rejected">Rejected</option>
+
+            </select>
+
+            <select
+                id="sortFilter"
+                class="sort-select"
+                onchange="filterApplications()">
+
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Company</th>
+                        <th>Role</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Location</th>
+                        <th>Job Type</th>
+                        <th>Job URL</th>
+                        <th>Actions</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="applicationTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const API_URL = "/api/applications";
+
+let allApplications = [];
+
+
+/* LOAD */
+
+async function loadApplications() {
+
+    try {
+
+        const response = await fetch(API_URL);
+
+        if (!response.ok) {
+            throw new Error("Failed to load applications");
+        }
+
+        allApplications = await response.json();
+
+        updateDashboard();
+        filterApplications();
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Unable to load applications.");
+
+    }
+
+}
+
+
+/* DASHBOARD */
+
+function updateDashboard() {
+
+    document.getElementById("totalCount").textContent =
+        allApplications.length;
+
+    document.getElementById("appliedCount").textContent =
+        allApplications.filter(
+            app => app.status === "Applied"
+        ).length;
+
+    document.getElementById("interviewCount").textContent =
+        allApplications.filter(
+            app => app.status === "Interview"
+        ).length;
+
+    document.getElementById("selectedCount").textContent =
+        allApplications.filter(
+            app => app.status === "Selected"
+        ).length;
+
+    document.getElementById("rejectedCount").textContent =
+        allApplications.filter(
+            app => app.status === "Rejected"
+        ).length;
+
+}
+
+
+/* ESCAPE HTML */
+
+function escapeHtml(value) {
+
+    return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* STATUS */
+
+function getStatusClass(status) {
+
+    if (status === "Applied") {
+        return "status-applied";
+    }
+
+    if (status === "Interview") {
+        return "status-interview";
+    }
+
+    if (status === "Selected") {
+        return "status-selected";
+    }
+
+    if (status === "Rejected") {
+        return "status-rejected";
+    }
+
+    return "";
+
+}
+
+
+/* DISPLAY */
+
+function displayApplications(applications) {
+
+    const table =
+        document.getElementById("applicationTable");
+
+    table.innerHTML = "";
+
+
+    applications.forEach(application => {
+
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+
+            <td>${application.id}</td>
+
+            <td>
+                <input
+                    class="edit-input"
+                    id="company-${application.id}"
+                    value="${escapeHtml(application.company)}"
+                    disabled>
+            </td>
+
+            <td>
+                <input
+                    class="edit-input"
+                    id="role-${application.id}"
+                    value="${escapeHtml(application.role)}"
+                    disabled>
+            </td>
+
+            <td>
+                <input
+                    class="edit-input"
+                    type="date"
+                    id="date-${application.id}"
+                    value="${application.applicationDate || ""}"
+                    disabled>
+            </td>
+
+            <td>
+
+                <div id="status-display-${application.id}">
+
+                    <span class="status-badge ${getStatusClass(application.status)}">
+                        ${escapeHtml(application.status)}
+                    </span>
+
+                </div>
+
+                <select
+                    class="edit-input"
+                    id="status-${application.id}"
+                    disabled
+                    style="display:none;">
+
+                    <option value="Applied"
+                        ${application.status === "Applied" ? "selected" : ""}>
+                        Applied
+                    </option>
+
+                    <option value="Interview"
+                        ${application.status === "Interview" ? "selected" : ""}>
+                        Interview
+                    </option>
+
+                    <option value="Selected"
+                        ${application.status === "Selected" ? "selected" : ""}>
+                        Selected
+                    </option>
+
+                    <option value="Rejected"
+                        ${application.status === "Rejected" ? "selected" : ""}>
+                        Rejected
+                    </option>
+
+                </select>
+
+            </td>
+
+            <td>
+                <input
+                    class="edit-input"
+                    id="location-${application.id}"
+                    value="${escapeHtml(application.location)}"
+                    disabled>
+            </td>
+
+            <td>
+
+                <select
+                    class="edit-input"
+                    id="jobType-${application.id}"
+                    disabled>
+
+                    <option value="">Select</option>
+
+                    <option value="Full-time"
+                        ${application.jobType === "Full-time" ? "selected" : ""}>
+                        Full-time
+                    </option>
+
+                    <option value="Internship"
+                        ${application.jobType === "Internship" ? "selected" : ""}>
+                        Internship
+                    </option>
+
+                    <option value="Contract"
+                        ${application.jobType === "Contract" ? "selected" : ""}>
+                        Contract
+                    </option>
+
+                    <option value="Part-time"
+                        ${application.jobType === "Part-time" ? "selected" : ""}>
+                        Part-time
+                    </option>
+
+                </select>
+
+            </td>
+
+            <td>
+
+                ${
+                    application.jobUrl
+                    ?
+                    `<a
+                        class="job-link"
+                        href="${escapeHtml(application.jobUrl)}"
+                        target="_blank">
+                        Open
+                    </a>`
+                    :
+                    "Not added"
+                }
+
+            </td>
+
+            <td class="action-cell">
+
+                <div class="action-buttons">
+
+                    <button
+                        class="view-btn"
+                        id="view-${application.id}"
+                        onclick="toggleDetails(${application.id})">
+                        Details
+                    </button>
+
+                    <button
+                        class="edit-btn"
+                        id="edit-${application.id}"
+                        onclick="editApplication(${application.id})">
+                        Edit
+                    </button>
+
+                    <button
+                        class="save-btn"
+                        id="save-${application.id}"
+                        onclick="saveApplication(${application.id})"
+                        style="display:none;">
+                        Save
+                    </button>
+
+                    <button
+                        class="cancel-btn"
+                        id="cancel-${application.id}"
+                        onclick="loadApplications()"
+                        style="display:none;">
+                        Cancel
+                    </button>
+
+                    <button
+                        class="delete-btn"
+                        onclick="deleteApplication(${application.id})">
+                        Delete
+                    </button>
+
+                </div>
+
+            </td>
+
+        `;
+
+        table.appendChild(row);
+
+
+        /* DETAILS ROW */
+
+        const detailsRow =
+            document.createElement("tr");
+
+        detailsRow.className = "details-row";
+
+        detailsRow.id =
+            `details-${application.id}`;
+
+        detailsRow.innerHTML = `
+
+            <td colspan="9">
+
+                <div class="details-content">
+
+                    <strong>Job URL:</strong>
+
+                    ${
+                        application.jobUrl
+                        ?
+                        `<a
+                            class="job-link"
+                            href="${escapeHtml(application.jobUrl)}"
+                            target="_blank">
+                            ${escapeHtml(application.jobUrl)}
+                        </a>`
+                        :
+                        "Not added"
+                    }
+
+                    <br>
+
+                    <strong>Location:</strong>
+                    ${escapeHtml(application.location || "Not added")}
+
+                    <br>
+
+                    <strong>Job Type:</strong>
+                    ${escapeHtml(application.jobType || "Not added")}
+
+                    <br>
+
+                    <strong>Notes:</strong>
+                    ${escapeHtml(application.notes || "No notes added")}
+
+                </div>
+
+            </td>
+
+        `;
+
+        table.appendChild(detailsRow);
+
+    });
+
+}
+
+
+/* ADD */
+
+async function addApplication() {
+
+    const company =
+        document.getElementById("company").value.trim();
+
+    const role =
+        document.getElementById("role").value.trim();
+
+    const applicationDate =
+        document.getElementById("applicationDate").value;
+
+    const status =
+        document.getElementById("status").value;
+
+    const jobUrl =
+        document.getElementById("jobUrl").value.trim();
+
+    const location =
+        document.getElementById("location").value.trim();
+
+    const jobType =
+        document.getElementById("jobType").value;
+
+    const notes =
+        document.getElementById("notes").value.trim();
+
+
+    if (!company || !role || !applicationDate) {
+
+        alert(
+            "Please fill Company, Job Role and Application Date."
+        );
+
+        return;
+    }
+
+
+    const application = {
+
+        company,
+        role,
+        applicationDate,
+        status,
+        jobUrl,
+        location,
+        jobType,
+        notes
+
+    };
+
+
+    try {
+
+        const response = await fetch(API_URL, {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(application)
+
+        });
+
+
+        if (!response.ok) {
+            throw new Error("Failed to add application");
+        }
+
+
+        document.getElementById("company").value = "";
+        document.getElementById("role").value = "";
+        document.getElementById("applicationDate").value = "";
+        document.getElementById("status").value = "Applied";
+        document.getElementById("jobUrl").value = "";
+        document.getElementById("location").value = "";
+        document.getElementById("jobType").value = "";
+        document.getElementById("notes").value = "";
+
+
+        await loadApplications();
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Unable to add application.");
+
+    }
+
+}
+
+
+/* EDIT */
+
+function editApplication(id) {
+
+    document.getElementById(`company-${id}`).disabled = false;
+
+    document.getElementById(`role-${id}`).disabled = false;
+
+    document.getElementById(`date-${id}`).disabled = false;
+
+    document.getElementById(`location-${id}`).disabled = false;
+
+    document.getElementById(`jobType-${id}`).disabled = false;
+
+    document.getElementById(`status-display-${id}`).style.display = "none";
+
+    document.getElementById(`status-${id}`).style.display = "block";
+
+    document.getElementById(`status-${id}`).disabled = false;
+
+    document.getElementById(`edit-${id}`).style.display = "none";
+
+    document.getElementById(`view-${id}`).style.display = "none";
+
+    document.getElementById(`save-${id}`).style.display = "inline-block";
+
+    document.getElementById(`cancel-${id}`).style.display = "inline-block";
+
+}
+
+
+/* SAVE */
+
+async function saveApplication(id) {
+
+    const existingApplication =
+        allApplications.find(app => app.id === id);
+
+
+    const application = {
+
+        company:
+            document.getElementById(`company-${id}`).value,
+
+        role:
+            document.getElementById(`role-${id}`).value,
+
+        applicationDate:
+            document.getElementById(`date-${id}`).value,
+
+        status:
+            document.getElementById(`status-${id}`).value,
+
+        jobUrl:
+            existingApplication
+                ? existingApplication.jobUrl || ""
+                : "",
+
+        location:
+            document.getElementById(`location-${id}`).value,
+
+        jobType:
+            document.getElementById(`jobType-${id}`).value,
+
+        notes:
+            existingApplication
+                ? existingApplication.notes || ""
+                : ""
+
+    };
+
+
+    try {
+
+        const response =
+            await fetch(`${API_URL}/${id}`, {
+
+                method: "PUT",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(application)
+
+            });
+
+
+        if (!response.ok) {
+            throw new Error("Failed to update application");
+        }
+
+
+        await loadApplications();
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Unable to update application.");
+
+    }
+
+}
+
+
+/* DELETE */
+
+async function deleteApplication(id) {
+
+    if (
+        !confirm(
+            "Are you sure you want to delete this application?"
+        )
+    ) {
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(`${API_URL}/${id}`, {
+                method: "DELETE"
+            });
+
+
+        if (!response.ok) {
+            throw new Error("Failed to delete application");
+        }
+
+
+        await loadApplications();
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Unable to delete application.");
+
+    }
+
+}
+
+
+/* DETAILS */
+
+function toggleDetails(id) {
+
+    const details =
+        document.getElementById(`details-${id}`);
+
+    const button =
+        document.getElementById(`view-${id}`);
+
+
+    if (details.style.display === "table-row") {
+
+        details.style.display = "none";
+
+        button.textContent = "Details";
+
+    } else {
+
+        details.style.display = "table-row";
+
+        button.textContent = "Hide Details";
+
+    }
+
+}
+
+
+/* SEARCH + FILTER + SORT */
+
+function filterApplications() {
+
+    const searchText =
+        document.getElementById("searchInput")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const selectedStatus =
+        document.getElementById("statusFilter").value;
+
+
+    const selectedSort =
+        document.getElementById("sortFilter").value;
+
+
+    let filteredApplications =
+        allApplications.filter(application => {
+
+            const company =
+                String(application.company || "")
+                    .toLowerCase();
+
+            const role =
+                String(application.role || "")
+                    .toLowerCase();
+
+
+            const matchesSearch =
+                company.includes(searchText) ||
+                role.includes(searchText);
+
+
+            const matchesStatus =
+                selectedStatus === "All" ||
+                application.status === selectedStatus;
+
+
+            return matchesSearch && matchesStatus;
+
+        });
+
+
+    filteredApplications.sort((a, b) => {
+
+        const dateA =
+            new Date(a.applicationDate);
+
+        const dateB =
+            new Date(b.applicationDate);
+
+
+        if (selectedSort === "newest") {
+            return dateB - dateA;
+        }
+
+        return dateA - dateB;
+
+    });
+
+
+    displayApplications(filteredApplications);
+
+}
+
+
+/* START */
+
+loadApplications();
+
+</script>
+
+</body>
+
+</html>
