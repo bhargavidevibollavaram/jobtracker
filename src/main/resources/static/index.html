@@ -11,36 +11,42 @@
 
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f7fb;
-            color: #1f2937;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            min-height: 100vh;
         }
 
+        /* HEADER */
+
         header {
-            background: #1f2937;
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
             color: white;
-            padding: 28px 20px;
+            padding: 38px 20px;
             text-align: center;
         }
 
         header h1 {
-            margin: 0;
-            font-size: 30px;
+            font-size: 32px;
+            margin-bottom: 8px;
         }
 
         header p {
-            margin: 8px 0 0;
-            opacity: 0.85;
+            font-size: 15px;
+            opacity: 0.9;
         }
+
+        /* MAIN CONTAINER */
 
         .container {
             width: 94%;
             max-width: 1400px;
-            margin: 28px auto;
+            margin: 30px auto;
         }
 
         /* DASHBOARD */
@@ -48,42 +54,53 @@
         .dashboard {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 15px;
-            margin-bottom: 25px;
+            gap: 18px;
+            margin-bottom: 28px;
         }
 
         .dashboard-card {
             background: white;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.07);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s ease,
+                        box-shadow 0.2s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 22px rgba(15, 23, 42, 0.10);
         }
 
         .dashboard-card h3 {
-            margin: 0 0 10px;
-            font-size: 14px;
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 10px;
+            font-weight: 600;
         }
 
         .dashboard-card p {
-            margin: 0;
-            font-size: 28px;
-            font-weight: bold;
+            font-size: 30px;
+            font-weight: 700;
+            color: #1e293b;
         }
 
-        /* CARD */
+        /* COMMON CARD */
 
         .card {
             background: white;
-            padding: 24px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-radius: 14px;
+            padding: 26px;
+            margin-bottom: 28px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
         }
 
         .card h2 {
-            margin-top: 0;
-            margin-bottom: 20px;
+            font-size: 21px;
+            margin-bottom: 22px;
+            color: #0f172a;
         }
 
         /* FORM */
@@ -91,7 +108,7 @@
         .form-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
+            gap: 20px;
         }
 
         .form-group {
@@ -107,7 +124,7 @@
         label {
             font-size: 13px;
             font-weight: 700;
-            color: #374151;
+            color: #334155;
         }
 
         .required {
@@ -118,14 +135,23 @@
         select,
         textarea {
             width: 100%;
-            padding: 11px 12px;
+            padding: 12px 13px;
             border: 1px solid #cbd5e1;
-            border-radius: 7px;
+            border-radius: 8px;
             font-size: 14px;
-            font-family: Arial, sans-serif;
+            font-family: inherit;
+            color: #1e293b;
             background: white;
-            color: #1f2937;
             outline: none;
+            transition: border-color 0.2s,
+                        box-shadow 0.2s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
         }
 
         input::placeholder,
@@ -133,43 +159,17 @@
             color: #94a3b8;
         }
 
-        input:focus,
-        select:focus,
-        textarea:focus {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.10);
-        }
-
         textarea {
-            min-height: 90px;
+            min-height: 100px;
             resize: vertical;
         }
 
         .form-help {
+            color: #64748b;
             font-size: 11px;
-            color: #6b7280;
         }
 
-        .form-actions {
-            margin-top: 20px;
-        }
-
-        .add-btn {
-            background: #2563eb;
-            padding: 11px 20px;
-            border: none;
-            border-radius: 7px;
-            color: white;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .add-btn:hover {
-            background: #1d4ed8;
-        }
-
-        /* VALIDATION ERROR */
+        /* ERROR BOX */
 
         .error-box {
             display: none;
@@ -177,24 +177,47 @@
             border: 1px solid #fecaca;
             color: #991b1b;
             padding: 14px 16px;
-            border-radius: 8px;
-            margin-bottom: 18px;
-            line-height: 1.6;
+            border-radius: 9px;
+            margin-bottom: 20px;
         }
 
         .error-box strong {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
 
         .error-box ul {
-            margin: 5px 0 0 20px;
-            padding: 0;
+            margin-left: 20px;
+            line-height: 1.6;
         }
 
         .input-error {
             border-color: #dc2626 !important;
             background: #fff7f7;
+        }
+
+        /* ADD BUTTON */
+
+        .form-actions {
+            margin-top: 22px;
+        }
+
+        .add-btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s,
+                        transform 0.2s;
+        }
+
+        .add-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
         }
 
         /* FILTERS */
@@ -206,20 +229,13 @@
             margin-bottom: 20px;
         }
 
-        .search-box,
-        .filter-select,
-        .sort-select {
-            width: 100%;
-            min-width: 0;
-        }
-
         /* TABLE */
 
         .table-container {
             width: 100%;
             overflow-x: auto;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
         }
 
         table {
@@ -230,16 +246,18 @@
 
         th {
             background: #f1f5f9;
+            color: #475569;
             padding: 14px 12px;
             text-align: left;
-            font-size: 13px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
             white-space: nowrap;
-            color: #334155;
         }
 
         td {
-            padding: 12px;
-            border-bottom: 1px solid #e5e7eb;
+            padding: 13px 12px;
+            border-top: 1px solid #e2e8f0;
             font-size: 13px;
             vertical-align: middle;
         }
@@ -248,12 +266,13 @@
             background: #f8fafc;
         }
 
-        /* INPUTS INSIDE TABLE */
+        /* TABLE INPUT */
 
         .edit-input {
             width: 100%;
             min-width: 95px;
             padding: 8px 9px;
+            border-radius: 6px;
             font-size: 13px;
         }
 
@@ -263,7 +282,7 @@
             display: inline-block;
             padding: 6px 11px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             white-space: nowrap;
         }
@@ -288,29 +307,44 @@
             color: #991b1b;
         }
 
+        /* JOB LINK */
+
+        .job-link {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .job-link:hover {
+            text-decoration: underline;
+        }
+
         /* ACTIONS */
 
         .action-cell {
-            width: 280px;
             min-width: 280px;
         }
 
         .action-buttons {
             display: flex;
-            align-items: center;
-            gap: 7px;
+            gap: 6px;
             flex-wrap: wrap;
         }
 
         .action-buttons button {
             border: none;
             border-radius: 6px;
-            padding: 8px 12px;
-            min-width: 68px;
+            padding: 8px 11px;
             color: white;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .action-buttons button:hover {
+            opacity: 0.85;
         }
 
         .view-btn {
@@ -326,28 +360,11 @@
         }
 
         .cancel-btn {
-            background: #6b7280;
+            background: #64748b;
         }
 
         .delete-btn {
             background: #dc2626;
-        }
-
-        .action-buttons button:hover {
-            opacity: 0.85;
-        }
-
-        /* JOB URL */
-
-        .job-link {
-            color: #2563eb;
-            text-decoration: none;
-            font-weight: 700;
-            white-space: nowrap;
-        }
-
-        .job-link:hover {
-            text-decoration: underline;
         }
 
         /* DETAILS */
@@ -358,19 +375,21 @@
         }
 
         .details-content {
-            padding: 18px;
-            line-height: 1.8;
+            padding: 20px;
+            line-height: 1.9;
             font-size: 14px;
+            color: #475569;
         }
 
         .details-content strong {
             display: inline-block;
-            min-width: 100px;
+            min-width: 105px;
+            color: #1e293b;
         }
 
         /* RESPONSIVE */
 
-        @media (max-width: 950px) {
+        @media (max-width: 1050px) {
 
             .dashboard {
                 grid-template-columns: repeat(3, 1fr);
@@ -389,14 +408,32 @@
             }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 650px) {
+
+            header {
+                padding: 30px 15px;
+            }
+
+            header h1 {
+                font-size: 25px;
+            }
 
             .container {
-                width: 96%;
+                width: 95%;
+                margin-top: 20px;
             }
 
             .dashboard {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .dashboard-card {
+                padding: 17px;
+            }
+
+            .dashboard-card p {
+                font-size: 24px;
             }
 
             .form-grid {
@@ -411,8 +448,8 @@
                 grid-column: auto;
             }
 
-            header h1 {
-                font-size: 24px;
+            .card {
+                padding: 18px;
             }
         }
 
@@ -422,6 +459,7 @@
 
 
 <body>
+
 
 <header>
 
@@ -475,8 +513,6 @@
 
         <h2>Add Job Application</h2>
 
-
-        <!-- BACKEND ERROR BOX -->
 
         <div
             id="errorBox"
@@ -540,9 +576,7 @@
 
             <div class="form-group">
 
-                <label>
-                    Status
-                </label>
+                <label>Status</label>
 
                 <select id="status">
 
@@ -569,9 +603,7 @@
 
             <div class="form-group">
 
-                <label>
-                    Location
-                </label>
+                <label>Location</label>
 
                 <input
                     type="text"
@@ -583,9 +615,7 @@
 
             <div class="form-group">
 
-                <label>
-                    Job Type
-                </label>
+                <label>Job Type</label>
 
                 <select id="jobType">
 
@@ -616,9 +646,7 @@
 
             <div class="form-group full">
 
-                <label>
-                    Job URL
-                </label>
+                <label>Job URL</label>
 
                 <input
                     type="url"
@@ -634,9 +662,7 @@
 
             <div class="form-group full">
 
-                <label>
-                    Notes
-                </label>
+                <label>Notes</label>
 
                 <textarea
                     id="notes"
@@ -662,7 +688,7 @@
     </div>
 
 
-    <!-- APPLICATION LIST -->
+    <!-- APPLICATIONS -->
 
     <div class="card">
 
@@ -676,12 +702,11 @@
                 id="searchInput"
                 class="search-box"
                 placeholder="Search by company or job role..."
-                oninput="filterApplications()">
+                oninput="filterApplications">
 
 
             <select
                 id="statusFilter"
-                class="filter-select"
                 onchange="filterApplications()">
 
                 <option value="All">
@@ -709,7 +734,6 @@
 
             <select
                 id="sortFilter"
-                class="sort-select"
                 onchange="filterApplications()">
 
                 <option value="newest">
@@ -747,7 +771,6 @@
 
                 </thead>
 
-
                 <tbody id="applicationTable"></tbody>
 
             </table>
@@ -768,8 +791,6 @@ let allApplications = [];
 
 
 
-/* SHOW VALIDATION ERRORS */
-
 function showValidationErrors(errors) {
 
     const errorBox =
@@ -777,7 +798,6 @@ function showValidationErrors(errors) {
 
     const errorList =
         document.getElementById("errorList");
-
 
     errorList.innerHTML = "";
 
@@ -812,8 +832,6 @@ function showValidationErrors(errors) {
 
 
 
-/* CLEAR VALIDATION ERRORS */
-
 function clearValidationErrors() {
 
     const errorBox =
@@ -841,8 +859,6 @@ function clearValidationErrors() {
 }
 
 
-
-/* LOAD APPLICATIONS */
 
 async function loadApplications() {
 
@@ -884,33 +900,41 @@ async function loadApplications() {
 
 
 
-/* DASHBOARD */
-
 function updateDashboard() {
 
-    document.getElementById("totalCount").textContent =
+    document.getElementById(
+        "totalCount"
+    ).textContent =
         allApplications.length;
 
 
-    document.getElementById("appliedCount").textContent =
+    document.getElementById(
+        "appliedCount"
+    ).textContent =
         allApplications.filter(
             app => app.status === "Applied"
         ).length;
 
 
-    document.getElementById("interviewCount").textContent =
+    document.getElementById(
+        "interviewCount"
+    ).textContent =
         allApplications.filter(
             app => app.status === "Interview"
         ).length;
 
 
-    document.getElementById("selectedCount").textContent =
+    document.getElementById(
+        "selectedCount"
+    ).textContent =
         allApplications.filter(
             app => app.status === "Selected"
         ).length;
 
 
-    document.getElementById("rejectedCount").textContent =
+    document.getElementById(
+        "rejectedCount"
+    ).textContent =
         allApplications.filter(
             app => app.status === "Rejected"
         ).length;
@@ -918,8 +942,6 @@ function updateDashboard() {
 }
 
 
-
-/* ESCAPE HTML */
 
 function escapeHtml(value) {
 
@@ -934,45 +956,25 @@ function escapeHtml(value) {
 
 
 
-/* STATUS CLASS */
-
 function getStatusClass(status) {
 
-    if (status === "Applied") {
-
+    if (status === "Applied")
         return "status-applied";
 
-    }
-
-
-    if (status === "Interview") {
-
+    if (status === "Interview")
         return "status-interview";
 
-    }
-
-
-    if (status === "Selected") {
-
+    if (status === "Selected")
         return "status-selected";
 
-    }
-
-
-    if (status === "Rejected") {
-
+    if (status === "Rejected")
         return "status-rejected";
-
-    }
-
 
     return "";
 
 }
 
 
-
-/* DISPLAY APPLICATIONS */
 
 function displayApplications(applications) {
 
@@ -987,16 +989,13 @@ function displayApplications(applications) {
 
     applications.forEach(application => {
 
-
         const row =
             document.createElement("tr");
 
 
         row.innerHTML = `
 
-            <td>
-                ${application.id}
-            </td>
+            <td>${application.id}</td>
 
 
             <td>
@@ -1035,8 +1034,7 @@ function displayApplications(applications) {
 
             <td>
 
-                <div
-                    id="status-display-${application.id}">
+                <div id="status-display-${application.id}">
 
                     <span
                         class="status-badge ${getStatusClass(application.status)}">
@@ -1054,39 +1052,24 @@ function displayApplications(applications) {
                     disabled
                     style="display:none;">
 
-                    <option
-                        value="Applied"
+                    <option value="Applied"
                         ${application.status === "Applied" ? "selected" : ""}>
-
                         Applied
-
                     </option>
 
-
-                    <option
-                        value="Interview"
+                    <option value="Interview"
                         ${application.status === "Interview" ? "selected" : ""}>
-
                         Interview
-
                     </option>
 
-
-                    <option
-                        value="Selected"
+                    <option value="Selected"
                         ${application.status === "Selected" ? "selected" : ""}>
-
                         Selected
-
                     </option>
 
-
-                    <option
-                        value="Rejected"
+                    <option value="Rejected"
                         ${application.status === "Rejected" ? "selected" : ""}>
-
                         Rejected
-
                     </option>
 
                 </select>
@@ -1112,40 +1095,26 @@ function displayApplications(applications) {
                     id="jobType-${application.id}"
                     disabled>
 
-                    <option value="">
-                        Select
-                    </option>
+                    <option value="">Select</option>
 
-                    <option
-                        value="Full-time"
+                    <option value="Full-time"
                         ${application.jobType === "Full-time" ? "selected" : ""}>
-
                         Full-time
-
                     </option>
 
-                    <option
-                        value="Internship"
+                    <option value="Internship"
                         ${application.jobType === "Internship" ? "selected" : ""}>
-
                         Internship
-
                     </option>
 
-                    <option
-                        value="Contract"
+                    <option value="Contract"
                         ${application.jobType === "Contract" ? "selected" : ""}>
-
                         Contract
-
                     </option>
 
-                    <option
-                        value="Part-time"
+                    <option value="Part-time"
                         ${application.jobType === "Part-time" ? "selected" : ""}>
-
                         Part-time
-
                     </option>
 
                 </select>
@@ -1157,20 +1126,14 @@ function displayApplications(applications) {
 
                 ${
                     application.jobUrl
-
                     ?
-
                     `<a
                         class="job-link"
                         href="${escapeHtml(application.jobUrl)}"
                         target="_blank">
-
                         Open
-
                     </a>`
-
                     :
-
                     "Not added"
                 }
 
@@ -1181,14 +1144,11 @@ function displayApplications(applications) {
 
                 <div class="action-buttons">
 
-
                     <button
                         class="view-btn"
                         id="view-${application.id}"
                         onclick="toggleDetails(${application.id})">
-
                         Details
-
                     </button>
 
 
@@ -1196,9 +1156,7 @@ function displayApplications(applications) {
                         class="edit-btn"
                         id="edit-${application.id}"
                         onclick="editApplication(${application.id})">
-
                         Edit
-
                     </button>
 
 
@@ -1207,9 +1165,7 @@ function displayApplications(applications) {
                         id="save-${application.id}"
                         onclick="saveApplication(${application.id})"
                         style="display:none;">
-
                         Save
-
                     </button>
 
 
@@ -1218,20 +1174,15 @@ function displayApplications(applications) {
                         id="cancel-${application.id}"
                         onclick="loadApplications()"
                         style="display:none;">
-
                         Cancel
-
                     </button>
 
 
                     <button
                         class="delete-btn"
                         onclick="deleteApplication(${application.id})">
-
                         Delete
-
                     </button>
-
 
                 </div>
 
@@ -1242,9 +1193,6 @@ function displayApplications(applications) {
 
         table.appendChild(row);
 
-
-
-        /* DETAILS ROW */
 
         const detailsRow =
             document.createElement("tr");
@@ -1264,64 +1212,42 @@ function displayApplications(applications) {
 
                 <div class="details-content">
 
-
-                    <strong>
-                        Job URL:
-                    </strong>
-
+                    <strong>Job URL:</strong>
 
                     ${
                         application.jobUrl
-
                         ?
-
                         `<a
                             class="job-link"
                             href="${escapeHtml(application.jobUrl)}"
                             target="_blank">
-
                             ${escapeHtml(application.jobUrl)}
-
                         </a>`
-
                         :
-
                         "Not added"
                     }
 
-
                     <br>
 
-
-                    <strong>
-                        Location:
-                    </strong>
+                    <strong>Location:</strong>
 
                     ${escapeHtml(
                         application.location ||
                         "Not added"
                     )}
 
-
                     <br>
 
-
-                    <strong>
-                        Job Type:
-                    </strong>
+                    <strong>Job Type:</strong>
 
                     ${escapeHtml(
                         application.jobType ||
                         "Not added"
                     )}
 
-
                     <br>
 
-
-                    <strong>
-                        Notes:
-                    </strong>
+                    <strong>Notes:</strong>
 
                     ${escapeHtml(
                         application.notes ||
@@ -1343,10 +1269,7 @@ function displayApplications(applications) {
 
 
 
-/* ADD APPLICATION */
-
 async function addApplication() {
-
 
     clearValidationErrors();
 
@@ -1400,62 +1323,28 @@ async function addApplication() {
 
 
 
-    /* FRONTEND VALIDATION */
-
-    if (!company || !role || !applicationDate) {
-
-        if (!company) {
-
-            document
-                .getElementById("company")
-                .classList.add("input-error");
-
-        }
-
-
-        if (!role) {
-
-            document
-                .getElementById("role")
-                .classList.add("input-error");
-
-        }
-
-
-        if (!applicationDate) {
-
-            document
-                .getElementById("applicationDate")
-                .classList.add("input-error");
-
-        }
-
+    if (
+        !company ||
+        !role ||
+        !applicationDate
+    ) {
 
         const errors = {};
 
 
-        if (!company) {
-
+        if (!company)
             errors.company =
                 "Company is required";
 
-        }
 
-
-        if (!role) {
-
+        if (!role)
             errors.role =
                 "Job role is required";
 
-        }
 
-
-        if (!applicationDate) {
-
+        if (!applicationDate)
             errors.applicationDate =
                 "Application date is required";
-
-        }
 
 
         showValidationErrors(errors);
@@ -1483,17 +1372,14 @@ async function addApplication() {
 
     try {
 
-
         const response =
             await fetch(API_URL, {
 
                 method: "POST",
 
                 headers: {
-
                     "Content-Type":
                         "application/json"
-
                 },
 
                 body:
@@ -1502,14 +1388,9 @@ async function addApplication() {
             });
 
 
-
-        /* BACKEND VALIDATION ERROR */
-
         if (!response.ok) {
 
-
             let errorData = null;
-
 
             try {
 
@@ -1521,7 +1402,6 @@ async function addApplication() {
                 errorData = null;
 
             }
-
 
 
             if (
@@ -1545,9 +1425,6 @@ async function addApplication() {
 
         }
 
-
-
-        /* CLEAR FORM */
 
         document.getElementById(
             "company"
@@ -1591,16 +1468,12 @@ async function addApplication() {
 
         clearValidationErrors();
 
-
         await loadApplications();
-
 
 
     } catch (error) {
 
-
         console.error(error);
-
 
         alert(
             "Unable to add application."
@@ -1612,10 +1485,7 @@ async function addApplication() {
 
 
 
-/* EDIT APPLICATION */
-
 function editApplication(id) {
-
 
     document.getElementById(
         `company-${id}`
@@ -1680,10 +1550,7 @@ function editApplication(id) {
 
 
 
-/* SAVE APPLICATION */
-
 async function saveApplication(id) {
-
 
     const existingApplication =
         allApplications.find(
@@ -1691,51 +1558,42 @@ async function saveApplication(id) {
         );
 
 
-
     const application = {
-
 
         company:
             document.getElementById(
                 `company-${id}`
-            ).value,
-
+            ).value.trim(),
 
         role:
             document.getElementById(
                 `role-${id}`
-            ).value,
-
+            ).value.trim(),
 
         applicationDate:
             document.getElementById(
                 `date-${id}`
             ).value,
 
-
         status:
             document.getElementById(
                 `status-${id}`
             ).value,
-
 
         jobUrl:
             existingApplication
                 ? existingApplication.jobUrl || ""
                 : "",
 
-
         location:
             document.getElementById(
                 `location-${id}`
-            ).value,
-
+            ).value.trim(),
 
         jobType:
             document.getElementById(
                 `jobType-${id}`
             ).value,
-
 
         notes:
             existingApplication
@@ -1745,30 +1603,23 @@ async function saveApplication(id) {
     };
 
 
-
     try {
-
 
         const response =
             await fetch(
                 `${API_URL}/${id}`,
                 {
-
                     method: "PUT",
 
                     headers: {
-
                         "Content-Type":
                             "application/json"
-
                     },
 
                     body:
                         JSON.stringify(application)
-
                 }
             );
-
 
 
         if (!response.ok) {
@@ -1780,13 +1631,10 @@ async function saveApplication(id) {
         }
 
 
-
         await loadApplications();
 
 
-
     } catch (error) {
-
 
         console.error(error);
 
@@ -1800,25 +1648,18 @@ async function saveApplication(id) {
 
 
 
-/* DELETE APPLICATION */
-
 async function deleteApplication(id) {
-
 
     if (
         !confirm(
             "Are you sure you want to delete this application?"
         )
     ) {
-
         return;
-
     }
 
 
-
     try {
-
 
         const response =
             await fetch(
@@ -1827,7 +1668,6 @@ async function deleteApplication(id) {
                     method: "DELETE"
                 }
             );
-
 
 
         if (!response.ok) {
@@ -1839,13 +1679,10 @@ async function deleteApplication(id) {
         }
 
 
-
         await loadApplications();
 
 
-
     } catch (error) {
-
 
         console.error(error);
 
@@ -1859,10 +1696,7 @@ async function deleteApplication(id) {
 
 
 
-/* DETAILS */
-
 function toggleDetails(id) {
-
 
     const details =
         document.getElementById(
@@ -1876,27 +1710,21 @@ function toggleDetails(id) {
         );
 
 
-
     if (
         details.style.display ===
         "table-row"
     ) {
 
-
         details.style.display =
             "none";
-
 
         button.textContent =
             "Details";
 
-
     } else {
-
 
         details.style.display =
             "table-row";
-
 
         button.textContent =
             "Hide Details";
@@ -1907,10 +1735,7 @@ function toggleDetails(id) {
 
 
 
-/* SEARCH + FILTER + SORT */
-
 function filterApplications() {
-
 
     const searchText =
         document.getElementById(
@@ -1921,12 +1746,10 @@ function filterApplications() {
         .toLowerCase();
 
 
-
     const selectedStatus =
         document.getElementById(
             "statusFilter"
         ).value;
-
 
 
     const selectedSort =
@@ -1935,11 +1758,9 @@ function filterApplications() {
         ).value;
 
 
-
     let filteredApplications =
         allApplications.filter(
             application => {
-
 
                 const company =
                     String(
@@ -1953,18 +1774,15 @@ function filterApplications() {
                     ).toLowerCase();
 
 
-
                 const matchesSearch =
                     company.includes(searchText) ||
                     role.includes(searchText);
-
 
 
                 const matchesStatus =
                     selectedStatus === "All" ||
                     application.status ===
                     selectedStatus;
-
 
 
                 return (
@@ -1976,22 +1794,18 @@ function filterApplications() {
         );
 
 
-
     filteredApplications.sort(
         (a, b) => {
-
 
             const dateA =
                 new Date(
                     a.applicationDate
                 );
 
-
             const dateB =
                 new Date(
                     b.applicationDate
                 );
-
 
 
             if (
@@ -2004,12 +1818,10 @@ function filterApplications() {
             }
 
 
-
             return dateA - dateB;
 
         }
     );
-
 
 
     displayApplications(
@@ -2020,18 +1832,14 @@ function filterApplications() {
 
 
 
-/* REMOVE RED ERROR WHEN USER STARTS TYPING */
-
 document
     .getElementById("company")
     .addEventListener(
         "input",
         function () {
-
             this.classList.remove(
                 "input-error"
             );
-
         }
     );
 
@@ -2041,11 +1849,9 @@ document
     .addEventListener(
         "input",
         function () {
-
             this.classList.remove(
                 "input-error"
             );
-
         }
     );
 
@@ -2055,17 +1861,13 @@ document
     .addEventListener(
         "change",
         function () {
-
             this.classList.remove(
                 "input-error"
             );
-
         }
     );
 
 
-
-/* START APPLICATION */
 
 loadApplications();
 
