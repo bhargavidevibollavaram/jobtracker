@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Job Application Tracker</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -41,6 +43,8 @@
             margin: 28px auto;
         }
 
+        /* DASHBOARD */
+
         .dashboard {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -67,6 +71,8 @@
             font-weight: bold;
         }
 
+        /* CARD */
+
         .card {
             background: white;
             padding: 24px;
@@ -79,6 +85,8 @@
             margin-top: 0;
             margin-bottom: 20px;
         }
+
+        /* FORM */
 
         .form-grid {
             display: grid;
@@ -161,6 +169,36 @@
             background: #1d4ed8;
         }
 
+        /* VALIDATION ERROR */
+
+        .error-box {
+            display: none;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            line-height: 1.6;
+        }
+
+        .error-box strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .error-box ul {
+            margin: 5px 0 0 20px;
+            padding: 0;
+        }
+
+        .input-error {
+            border-color: #dc2626 !important;
+            background: #fff7f7;
+        }
+
+        /* FILTERS */
+
         .filters {
             display: grid;
             grid-template-columns: minmax(250px, 1fr) 180px 180px;
@@ -174,6 +212,8 @@
             width: 100%;
             min-width: 0;
         }
+
+        /* TABLE */
 
         .table-container {
             width: 100%;
@@ -208,6 +248,8 @@
             background: #f8fafc;
         }
 
+        /* INPUTS INSIDE TABLE */
+
         .edit-input {
             width: 100%;
             min-width: 95px;
@@ -215,14 +257,7 @@
             font-size: 13px;
         }
 
-        .edit-textarea {
-            width: 100%;
-            min-height: 100px;
-            padding: 9px;
-            font-size: 13px;
-            resize: vertical;
-            margin-top: 6px;
-        }
+        /* STATUS */
 
         .status-badge {
             display: inline-block;
@@ -252,6 +287,8 @@
             background: #fee2e2;
             color: #991b1b;
         }
+
+        /* ACTIONS */
 
         .action-cell {
             width: 280px;
@@ -300,6 +337,8 @@
             opacity: 0.85;
         }
 
+        /* JOB URL */
+
         .job-link {
             color: #2563eb;
             text-decoration: none;
@@ -310,6 +349,8 @@
         .job-link:hover {
             text-decoration: underline;
         }
+
+        /* DETAILS */
 
         .details-row {
             display: none;
@@ -327,14 +368,7 @@
             min-width: 100px;
         }
 
-        .notes-view {
-            margin-top: 5px;
-            white-space: normal;
-        }
-
-        .notes-edit {
-            display: none;
-        }
+        /* RESPONSIVE */
 
         @media (max-width: 950px) {
 
@@ -381,8 +415,11 @@
                 font-size: 24px;
             }
         }
+
     </style>
+
 </head>
+
 
 <body>
 
@@ -390,7 +427,9 @@
 
     <h1>Job Application Tracker</h1>
 
-    <p>Manage and track your job applications easily</p>
+    <p>
+        Manage and track your job applications easily
+    </p>
 
 </header>
 
@@ -403,47 +442,28 @@
     <div class="dashboard">
 
         <div class="dashboard-card">
-
             <h3>Total Applications</h3>
-
             <p id="totalCount">0</p>
-
         </div>
 
-
         <div class="dashboard-card">
-
             <h3>Applied</h3>
-
             <p id="appliedCount">0</p>
-
         </div>
 
-
         <div class="dashboard-card">
-
             <h3>Interview</h3>
-
             <p id="interviewCount">0</p>
-
         </div>
 
-
         <div class="dashboard-card">
-
             <h3>Selected</h3>
-
             <p id="selectedCount">0</p>
-
         </div>
 
-
         <div class="dashboard-card">
-
             <h3>Rejected</h3>
-
             <p id="rejectedCount">0</p>
-
         </div>
 
     </div>
@@ -456,13 +476,29 @@
         <h2>Add Job Application</h2>
 
 
+        <!-- BACKEND ERROR BOX -->
+
+        <div
+            id="errorBox"
+            class="error-box">
+
+            <strong>
+                Please correct the following errors:
+            </strong>
+
+            <ul id="errorList"></ul>
+
+        </div>
+
+
         <div class="form-grid">
 
 
             <div class="form-group">
 
                 <label>
-                    Company <span class="required">*</span>
+                    Company
+                    <span class="required">*</span>
                 </label>
 
                 <input
@@ -476,7 +512,8 @@
             <div class="form-group">
 
                 <label>
-                    Job Role <span class="required">*</span>
+                    Job Role
+                    <span class="required">*</span>
                 </label>
 
                 <input
@@ -490,7 +527,8 @@
             <div class="form-group">
 
                 <label>
-                    Application Date <span class="required">*</span>
+                    Application Date
+                    <span class="required">*</span>
                 </label>
 
                 <input
@@ -502,7 +540,9 @@
 
             <div class="form-group">
 
-                <label>Status</label>
+                <label>
+                    Status
+                </label>
 
                 <select id="status">
 
@@ -529,7 +569,9 @@
 
             <div class="form-group">
 
-                <label>Location</label>
+                <label>
+                    Location
+                </label>
 
                 <input
                     type="text"
@@ -541,7 +583,9 @@
 
             <div class="form-group">
 
-                <label>Job Type</label>
+                <label>
+                    Job Type
+                </label>
 
                 <select id="jobType">
 
@@ -572,7 +616,9 @@
 
             <div class="form-group full">
 
-                <label>Job URL</label>
+                <label>
+                    Job URL
+                </label>
 
                 <input
                     type="url"
@@ -588,7 +634,9 @@
 
             <div class="form-group full">
 
-                <label>Notes</label>
+                <label>
+                    Notes
+                </label>
 
                 <textarea
                     id="notes"
@@ -686,21 +734,13 @@
                     <tr>
 
                         <th>ID</th>
-
                         <th>Company</th>
-
                         <th>Role</th>
-
                         <th>Date</th>
-
                         <th>Status</th>
-
                         <th>Location</th>
-
                         <th>Job Type</th>
-
                         <th>Job URL</th>
-
                         <th>Actions</th>
 
                     </tr>
@@ -721,12 +761,88 @@
 
 <script>
 
+
 const API_URL = "/api/applications";
 
 let allApplications = [];
 
 
-/* LOAD */
+
+/* SHOW VALIDATION ERRORS */
+
+function showValidationErrors(errors) {
+
+    const errorBox =
+        document.getElementById("errorBox");
+
+    const errorList =
+        document.getElementById("errorList");
+
+
+    errorList.innerHTML = "";
+
+
+    Object.entries(errors).forEach(
+        ([field, message]) => {
+
+            const li =
+                document.createElement("li");
+
+            li.textContent = message;
+
+            errorList.appendChild(li);
+
+
+            const input =
+                document.getElementById(field);
+
+            if (input) {
+
+                input.classList.add("input-error");
+
+            }
+
+        }
+    );
+
+
+    errorBox.style.display = "block";
+
+}
+
+
+
+/* CLEAR VALIDATION ERRORS */
+
+function clearValidationErrors() {
+
+    const errorBox =
+        document.getElementById("errorBox");
+
+    const errorList =
+        document.getElementById("errorList");
+
+
+    errorList.innerHTML = "";
+
+    errorBox.style.display = "none";
+
+
+    document
+        .querySelectorAll(".input-error")
+        .forEach(input => {
+
+            input.classList.remove(
+                "input-error"
+            );
+
+        });
+
+}
+
+
+
+/* LOAD APPLICATIONS */
 
 async function loadApplications() {
 
@@ -767,48 +883,40 @@ async function loadApplications() {
 }
 
 
+
 /* DASHBOARD */
 
 function updateDashboard() {
 
-    document.getElementById(
-        "totalCount"
-    ).textContent =
+    document.getElementById("totalCount").textContent =
         allApplications.length;
 
 
-    document.getElementById(
-        "appliedCount"
-    ).textContent =
+    document.getElementById("appliedCount").textContent =
         allApplications.filter(
             app => app.status === "Applied"
         ).length;
 
 
-    document.getElementById(
-        "interviewCount"
-    ).textContent =
+    document.getElementById("interviewCount").textContent =
         allApplications.filter(
             app => app.status === "Interview"
         ).length;
 
 
-    document.getElementById(
-        "selectedCount"
-    ).textContent =
+    document.getElementById("selectedCount").textContent =
         allApplications.filter(
             app => app.status === "Selected"
         ).length;
 
 
-    document.getElementById(
-        "rejectedCount"
-    ).textContent =
+    document.getElementById("rejectedCount").textContent =
         allApplications.filter(
             app => app.status === "Rejected"
         ).length;
 
 }
+
 
 
 /* ESCAPE HTML */
@@ -825,7 +933,8 @@ function escapeHtml(value) {
 }
 
 
-/* STATUS */
+
+/* STATUS CLASS */
 
 function getStatusClass(status) {
 
@@ -835,11 +944,13 @@ function getStatusClass(status) {
 
     }
 
+
     if (status === "Interview") {
 
         return "status-interview";
 
     }
+
 
     if (status === "Selected") {
 
@@ -847,22 +958,23 @@ function getStatusClass(status) {
 
     }
 
+
     if (status === "Rejected") {
 
         return "status-rejected";
 
     }
 
+
     return "";
 
 }
 
 
-/* DISPLAY */
 
-function displayApplications(
-    applications
-) {
+/* DISPLAY APPLICATIONS */
+
+function displayApplications(applications) {
 
     const table =
         document.getElementById(
@@ -873,399 +985,371 @@ function displayApplications(
     table.innerHTML = "";
 
 
-    applications.forEach(
-        application => {
+    applications.forEach(application => {
 
 
-            const row =
-                document.createElement("tr");
+        const row =
+            document.createElement("tr");
 
 
-            row.innerHTML = `
+        row.innerHTML = `
 
-                <td>
-                    ${application.id}
-                </td>
-
-
-                <td>
-
-                    <input
-                        class="edit-input"
-                        id="company-${application.id}"
-                        value="${escapeHtml(application.company)}"
-                        disabled>
-
-                </td>
+            <td>
+                ${application.id}
+            </td>
 
 
-                <td>
+            <td>
 
-                    <input
-                        class="edit-input"
-                        id="role-${application.id}"
-                        value="${escapeHtml(application.role)}"
-                        disabled>
+                <input
+                    class="edit-input"
+                    id="company-${application.id}"
+                    value="${escapeHtml(application.company)}"
+                    disabled>
 
-                </td>
-
-
-                <td>
-
-                    <input
-                        class="edit-input"
-                        type="date"
-                        id="date-${application.id}"
-                        value="${application.applicationDate || ""}"
-                        disabled>
-
-                </td>
+            </td>
 
 
-                <td>
+            <td>
 
-                    <div
-                        id="status-display-${application.id}">
+                <input
+                    class="edit-input"
+                    id="role-${application.id}"
+                    value="${escapeHtml(application.role)}"
+                    disabled>
 
-                        <span
-                            class="status-badge ${getStatusClass(application.status)}">
-
-                            ${escapeHtml(
-                                application.status
-                            )}
-
-                        </span>
-
-                    </div>
+            </td>
 
 
-                    <select
-                        class="edit-input"
-                        id="status-${application.id}"
-                        disabled
+            <td>
+
+                <input
+                    class="edit-input"
+                    type="date"
+                    id="date-${application.id}"
+                    value="${application.applicationDate || ""}"
+                    disabled>
+
+            </td>
+
+
+            <td>
+
+                <div
+                    id="status-display-${application.id}">
+
+                    <span
+                        class="status-badge ${getStatusClass(application.status)}">
+
+                        ${escapeHtml(application.status)}
+
+                    </span>
+
+                </div>
+
+
+                <select
+                    class="edit-input"
+                    id="status-${application.id}"
+                    disabled
+                    style="display:none;">
+
+                    <option
+                        value="Applied"
+                        ${application.status === "Applied" ? "selected" : ""}>
+
+                        Applied
+
+                    </option>
+
+
+                    <option
+                        value="Interview"
+                        ${application.status === "Interview" ? "selected" : ""}>
+
+                        Interview
+
+                    </option>
+
+
+                    <option
+                        value="Selected"
+                        ${application.status === "Selected" ? "selected" : ""}>
+
+                        Selected
+
+                    </option>
+
+
+                    <option
+                        value="Rejected"
+                        ${application.status === "Rejected" ? "selected" : ""}>
+
+                        Rejected
+
+                    </option>
+
+                </select>
+
+            </td>
+
+
+            <td>
+
+                <input
+                    class="edit-input"
+                    id="location-${application.id}"
+                    value="${escapeHtml(application.location)}"
+                    disabled>
+
+            </td>
+
+
+            <td>
+
+                <select
+                    class="edit-input"
+                    id="jobType-${application.id}"
+                    disabled>
+
+                    <option value="">
+                        Select
+                    </option>
+
+                    <option
+                        value="Full-time"
+                        ${application.jobType === "Full-time" ? "selected" : ""}>
+
+                        Full-time
+
+                    </option>
+
+                    <option
+                        value="Internship"
+                        ${application.jobType === "Internship" ? "selected" : ""}>
+
+                        Internship
+
+                    </option>
+
+                    <option
+                        value="Contract"
+                        ${application.jobType === "Contract" ? "selected" : ""}>
+
+                        Contract
+
+                    </option>
+
+                    <option
+                        value="Part-time"
+                        ${application.jobType === "Part-time" ? "selected" : ""}>
+
+                        Part-time
+
+                    </option>
+
+                </select>
+
+            </td>
+
+
+            <td>
+
+                ${
+                    application.jobUrl
+
+                    ?
+
+                    `<a
+                        class="job-link"
+                        href="${escapeHtml(application.jobUrl)}"
+                        target="_blank">
+
+                        Open
+
+                    </a>`
+
+                    :
+
+                    "Not added"
+                }
+
+            </td>
+
+
+            <td class="action-cell">
+
+                <div class="action-buttons">
+
+
+                    <button
+                        class="view-btn"
+                        id="view-${application.id}"
+                        onclick="toggleDetails(${application.id})">
+
+                        Details
+
+                    </button>
+
+
+                    <button
+                        class="edit-btn"
+                        id="edit-${application.id}"
+                        onclick="editApplication(${application.id})">
+
+                        Edit
+
+                    </button>
+
+
+                    <button
+                        class="save-btn"
+                        id="save-${application.id}"
+                        onclick="saveApplication(${application.id})"
                         style="display:none;">
 
-                        <option value="Applied"
-                            ${application.status === "Applied"
-                                ? "selected"
-                                : ""}>
-                            Applied
-                        </option>
-
-                        <option value="Interview"
-                            ${application.status === "Interview"
-                                ? "selected"
-                                : ""}>
-                            Interview
-                        </option>
-
-                        <option value="Selected"
-                            ${application.status === "Selected"
-                                ? "selected"
-                                : ""}>
-                            Selected
-                        </option>
-
-                        <option value="Rejected"
-                            ${application.status === "Rejected"
-                                ? "selected"
-                                : ""}>
-                            Rejected
-                        </option>
-
-                    </select>
-
-                </td>
-
-
-                <td>
+                        Save
 
-                    <input
-                        class="edit-input"
-                        id="location-${application.id}"
-                        value="${escapeHtml(
-                            application.location
-                        )}"
-                        disabled>
+                    </button>
 
-                </td>
 
+                    <button
+                        class="cancel-btn"
+                        id="cancel-${application.id}"
+                        onclick="loadApplications()"
+                        style="display:none;">
 
-                <td>
+                        Cancel
 
-                    <select
-                        class="edit-input"
-                        id="jobType-${application.id}"
-                        disabled>
+                    </button>
 
-                        <option value="">
-                            Select
-                        </option>
 
-                        <option value="Full-time"
-                            ${application.jobType === "Full-time"
-                                ? "selected"
-                                : ""}>
-                            Full-time
-                        </option>
+                    <button
+                        class="delete-btn"
+                        onclick="deleteApplication(${application.id})">
 
-                        <option value="Internship"
-                            ${application.jobType === "Internship"
-                                ? "selected"
-                                : ""}>
-                            Internship
-                        </option>
+                        Delete
 
-                        <option value="Contract"
-                            ${application.jobType === "Contract"
-                                ? "selected"
-                                : ""}>
-                            Contract
-                        </option>
+                    </button>
 
-                        <option value="Part-time"
-                            ${application.jobType === "Part-time"
-                                ? "selected"
-                                : ""}>
-                            Part-time
-                        </option>
 
-                    </select>
+                </div>
 
-                </td>
+            </td>
 
+        `;
 
-                <td>
 
-                    <div
-                        id="joburl-display-${application.id}">
+        table.appendChild(row);
 
-                        ${
-                            application.jobUrl
-                            ?
-                            `<a
-                                class="job-link"
-                                href="${escapeHtml(
-                                    application.jobUrl
-                                )}"
-                                target="_blank">
 
-                                Open
 
-                            </a>`
-                            :
-                            "Not added"
-                        }
+        /* DETAILS ROW */
 
-                    </div>
+        const detailsRow =
+            document.createElement("tr");
 
 
-                    <input
-                        type="url"
-                        class="edit-input"
-                        id="jobUrl-${application.id}"
-                        value="${escapeHtml(
-                            application.jobUrl
-                        )}"
-                        disabled
-                        style="display:none;"
-                        placeholder="https://company.com/job">
+        detailsRow.className =
+            "details-row";
 
-                </td>
 
+        detailsRow.id =
+            `details-${application.id}`;
 
-                <td class="action-cell">
 
-                    <div class="action-buttons">
+        detailsRow.innerHTML = `
 
+            <td colspan="9">
 
-                        <button
-                            class="view-btn"
-                            id="view-${application.id}"
-                            onclick="toggleDetails(${application.id})">
+                <div class="details-content">
 
-                            Details
 
-                        </button>
+                    <strong>
+                        Job URL:
+                    </strong>
 
 
-                        <button
-                            class="edit-btn"
-                            id="edit-${application.id}"
-                            onclick="editApplication(${application.id})">
+                    ${
+                        application.jobUrl
 
-                            Edit
+                        ?
 
-                        </button>
+                        `<a
+                            class="job-link"
+                            href="${escapeHtml(application.jobUrl)}"
+                            target="_blank">
 
+                            ${escapeHtml(application.jobUrl)}
 
-                        <button
-                            class="save-btn"
-                            id="save-${application.id}"
-                            onclick="saveApplication(${application.id})"
-                            style="display:none;">
+                        </a>`
 
-                            Save
+                        :
 
-                        </button>
+                        "Not added"
+                    }
 
 
-                        <button
-                            class="cancel-btn"
-                            id="cancel-${application.id}"
-                            onclick="loadApplications()"
-                            style="display:none;">
+                    <br>
 
-                            Cancel
 
-                        </button>
+                    <strong>
+                        Location:
+                    </strong>
 
+                    ${escapeHtml(
+                        application.location ||
+                        "Not added"
+                    )}
 
-                        <button
-                            class="delete-btn"
-                            onclick="deleteApplication(${application.id})">
 
-                            Delete
+                    <br>
 
-                        </button>
 
+                    <strong>
+                        Job Type:
+                    </strong>
 
-                    </div>
+                    ${escapeHtml(
+                        application.jobType ||
+                        "Not added"
+                    )}
 
-                </td>
 
-            `;
+                    <br>
 
 
-            table.appendChild(row);
+                    <strong>
+                        Notes:
+                    </strong>
 
+                    ${escapeHtml(
+                        application.notes ||
+                        "No notes added"
+                    )}
 
-            /* DETAILS ROW */
+                </div>
 
-            const detailsRow =
-                document.createElement("tr");
+            </td>
 
+        `;
 
-            detailsRow.className =
-                "details-row";
 
+        table.appendChild(detailsRow);
 
-            detailsRow.id =
-                `details-${application.id}`;
-
-
-            detailsRow.innerHTML = `
-
-                <td colspan="9">
-
-                    <div class="details-content">
-
-
-                        <strong>
-                            Job URL:
-                        </strong>
-
-
-                        <span
-                            id="details-url-view-${application.id}">
-
-                            ${
-                                application.jobUrl
-                                ?
-                                `<a
-                                    class="job-link"
-                                    href="${escapeHtml(
-                                        application.jobUrl
-                                    )}"
-                                    target="_blank">
-
-                                    ${escapeHtml(
-                                        application.jobUrl
-                                    )}
-
-                                </a>`
-                                :
-                                "Not added"
-                            }
-
-                        </span>
-
-
-                        <br>
-
-
-                        <strong>
-                            Location:
-                        </strong>
-
-                        ${escapeHtml(
-                            application.location ||
-                            "Not added"
-                        )}
-
-                        <br>
-
-
-                        <strong>
-                            Job Type:
-                        </strong>
-
-                        ${escapeHtml(
-                            application.jobType ||
-                            "Not added"
-                        )}
-
-                        <br>
-
-
-                        <strong>
-                            Notes:
-                        </strong>
-
-
-                        <div
-                            id="notes-view-${application.id}"
-                            class="notes-view">
-
-                            ${escapeHtml(
-                                application.notes ||
-                                "No notes added"
-                            )}
-
-                        </div>
-
-
-                        <div
-                            id="notes-edit-${application.id}"
-                            class="notes-edit">
-
-                            <textarea
-                                class="edit-textarea"
-                                id="notes-${application.id}"
-                                placeholder="Update your notes...">${escapeHtml(
-                                    application.notes || ""
-                                )}</textarea>
-
-                        </div>
-
-                    </div>
-
-                </td>
-
-            `;
-
-
-            table.appendChild(detailsRow);
-
-        }
-    );
+    });
 
 }
 
 
-/* ADD */
+
+/* ADD APPLICATION */
 
 async function addApplication() {
+
+
+    clearValidationErrors();
+
 
     const company =
         document.getElementById(
@@ -1315,66 +1399,145 @@ async function addApplication() {
         ).value.trim();
 
 
-    if (
-        !company ||
-        !role ||
-        !applicationDate
-    ) {
 
-        alert(
-            "Please fill Company, Job Role and Application Date."
-        );
+    /* FRONTEND VALIDATION */
+
+    if (!company || !role || !applicationDate) {
+
+        if (!company) {
+
+            document
+                .getElementById("company")
+                .classList.add("input-error");
+
+        }
+
+
+        if (!role) {
+
+            document
+                .getElementById("role")
+                .classList.add("input-error");
+
+        }
+
+
+        if (!applicationDate) {
+
+            document
+                .getElementById("applicationDate")
+                .classList.add("input-error");
+
+        }
+
+
+        const errors = {};
+
+
+        if (!company) {
+
+            errors.company =
+                "Company is required";
+
+        }
+
+
+        if (!role) {
+
+            errors.role =
+                "Job role is required";
+
+        }
+
+
+        if (!applicationDate) {
+
+            errors.applicationDate =
+                "Application date is required";
+
+        }
+
+
+        showValidationErrors(errors);
 
         return;
 
     }
 
 
+
     const application = {
 
         company,
-
         role,
-
         applicationDate,
-
         status,
-
         jobUrl,
-
         location,
-
         jobType,
-
         notes
 
     };
 
 
+
     try {
 
+
         const response =
-            await fetch(
-                API_URL,
-                {
+            await fetch(API_URL, {
 
-                    method: "POST",
+                method: "POST",
 
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
+                headers: {
 
-                    body:
-                        JSON.stringify(
-                            application
-                        )
+                    "Content-Type":
+                        "application/json"
 
-                }
-            );
+                },
 
+                body:
+                    JSON.stringify(application)
+
+            });
+
+
+
+        /* BACKEND VALIDATION ERROR */
 
         if (!response.ok) {
+
+
+            let errorData = null;
+
+
+            try {
+
+                errorData =
+                    await response.json();
+
+            } catch (error) {
+
+                errorData = null;
+
+            }
+
+
+
+            if (
+                response.status === 400 &&
+                errorData &&
+                errorData.errors
+            ) {
+
+                showValidationErrors(
+                    errorData.errors
+                );
+
+                return;
+
+            }
+
 
             throw new Error(
                 "Failed to add application"
@@ -1382,6 +1545,9 @@ async function addApplication() {
 
         }
 
+
+
+        /* CLEAR FORM */
 
         document.getElementById(
             "company"
@@ -1423,12 +1589,18 @@ async function addApplication() {
         ).value = "";
 
 
+        clearValidationErrors();
+
+
         await loadApplications();
+
 
 
     } catch (error) {
 
+
         console.error(error);
+
 
         alert(
             "Unable to add application."
@@ -1439,7 +1611,8 @@ async function addApplication() {
 }
 
 
-/* EDIT */
+
+/* EDIT APPLICATION */
 
 function editApplication(id) {
 
@@ -1484,52 +1657,6 @@ function editApplication(id) {
     ).disabled = false;
 
 
-    /* JOB URL EDIT */
-
-    document.getElementById(
-        `joburl-display-${id}`
-    ).style.display = "none";
-
-
-    document.getElementById(
-        `jobUrl-${id}`
-    ).style.display = "block";
-
-
-    document.getElementById(
-        `jobUrl-${id}`
-    ).disabled = false;
-
-
-    /* NOTES EDIT */
-
-    const details =
-        document.getElementById(
-            `details-${id}`
-        );
-
-
-    if (
-        details.style.display !==
-        "table-row"
-    ) {
-
-        details.style.display =
-            "table-row";
-
-    }
-
-
-    document.getElementById(
-        `notes-view-${id}`
-    ).style.display = "none";
-
-
-    document.getElementById(
-        `notes-edit-${id}`
-    ).style.display = "block";
-
-
     document.getElementById(
         `edit-${id}`
     ).style.display = "none";
@@ -1552,62 +1679,71 @@ function editApplication(id) {
 }
 
 
-/* SAVE */
+
+/* SAVE APPLICATION */
 
 async function saveApplication(id) {
 
 
-    const application =
-        {
-
-            company:
-                document.getElementById(
-                    `company-${id}`
-                ).value,
+    const existingApplication =
+        allApplications.find(
+            app => app.id === id
+        );
 
 
-            role:
-                document.getElementById(
-                    `role-${id}`
-                ).value,
+
+    const application = {
 
 
-            applicationDate:
-                document.getElementById(
-                    `date-${id}`
-                ).value,
+        company:
+            document.getElementById(
+                `company-${id}`
+            ).value,
 
 
-            status:
-                document.getElementById(
-                    `status-${id}`
-                ).value,
+        role:
+            document.getElementById(
+                `role-${id}`
+            ).value,
 
 
-            jobUrl:
-                document.getElementById(
-                    `jobUrl-${id}`
-                ).value.trim(),
+        applicationDate:
+            document.getElementById(
+                `date-${id}`
+            ).value,
 
 
-            location:
-                document.getElementById(
-                    `location-${id}`
-                ).value,
+        status:
+            document.getElementById(
+                `status-${id}`
+            ).value,
 
 
-            jobType:
-                document.getElementById(
-                    `jobType-${id}`
-                ).value,
+        jobUrl:
+            existingApplication
+                ? existingApplication.jobUrl || ""
+                : "",
 
 
-            notes:
-                document.getElementById(
-                    `notes-${id}`
-                ).value.trim()
+        location:
+            document.getElementById(
+                `location-${id}`
+            ).value,
 
-        };
+
+        jobType:
+            document.getElementById(
+                `jobType-${id}`
+            ).value,
+
+
+        notes:
+            existingApplication
+                ? existingApplication.notes || ""
+                : ""
+
+    };
+
 
 
     try {
@@ -1628,12 +1764,11 @@ async function saveApplication(id) {
                     },
 
                     body:
-                        JSON.stringify(
-                            application
-                        )
+                        JSON.stringify(application)
 
                 }
             );
+
 
 
         if (!response.ok) {
@@ -1645,10 +1780,13 @@ async function saveApplication(id) {
         }
 
 
+
         await loadApplications();
 
 
+
     } catch (error) {
+
 
         console.error(error);
 
@@ -1661,7 +1799,8 @@ async function saveApplication(id) {
 }
 
 
-/* DELETE */
+
+/* DELETE APPLICATION */
 
 async function deleteApplication(id) {
 
@@ -1677,6 +1816,7 @@ async function deleteApplication(id) {
     }
 
 
+
     try {
 
 
@@ -1689,6 +1829,7 @@ async function deleteApplication(id) {
             );
 
 
+
         if (!response.ok) {
 
             throw new Error(
@@ -1698,10 +1839,13 @@ async function deleteApplication(id) {
         }
 
 
+
         await loadApplications();
 
 
+
     } catch (error) {
+
 
         console.error(error);
 
@@ -1712,6 +1856,7 @@ async function deleteApplication(id) {
     }
 
 }
+
 
 
 /* DETAILS */
@@ -1729,6 +1874,7 @@ function toggleDetails(id) {
         document.getElementById(
             `view-${id}`
         );
+
 
 
     if (
@@ -1760,6 +1906,7 @@ function toggleDetails(id) {
 }
 
 
+
 /* SEARCH + FILTER + SORT */
 
 function filterApplications() {
@@ -1774,16 +1921,19 @@ function filterApplications() {
         .toLowerCase();
 
 
+
     const selectedStatus =
         document.getElementById(
             "statusFilter"
         ).value;
 
 
+
     const selectedSort =
         document.getElementById(
             "sortFilter"
         ).value;
+
 
 
     let filteredApplications =
@@ -1793,32 +1943,28 @@ function filterApplications() {
 
                 const company =
                     String(
-                        application.company ||
-                        ""
+                        application.company || ""
                     ).toLowerCase();
 
 
                 const role =
                     String(
-                        application.role ||
-                        ""
+                        application.role || ""
                     ).toLowerCase();
 
 
+
                 const matchesSearch =
-                    company.includes(
-                        searchText
-                    ) ||
-                    role.includes(
-                        searchText
-                    );
+                    company.includes(searchText) ||
+                    role.includes(searchText);
+
 
 
                 const matchesStatus =
-                    selectedStatus ===
-                    "All" ||
+                    selectedStatus === "All" ||
                     application.status ===
                     selectedStatus;
+
 
 
                 return (
@@ -1828,6 +1974,7 @@ function filterApplications() {
 
             }
         );
+
 
 
     filteredApplications.sort(
@@ -1846,6 +1993,7 @@ function filterApplications() {
                 );
 
 
+
             if (
                 selectedSort ===
                 "newest"
@@ -1856,10 +2004,12 @@ function filterApplications() {
             }
 
 
+
             return dateA - dateB;
 
         }
     );
+
 
 
     displayApplications(
@@ -1869,7 +2019,53 @@ function filterApplications() {
 }
 
 
-/* START */
+
+/* REMOVE RED ERROR WHEN USER STARTS TYPING */
+
+document
+    .getElementById("company")
+    .addEventListener(
+        "input",
+        function () {
+
+            this.classList.remove(
+                "input-error"
+            );
+
+        }
+    );
+
+
+document
+    .getElementById("role")
+    .addEventListener(
+        "input",
+        function () {
+
+            this.classList.remove(
+                "input-error"
+            );
+
+        }
+    );
+
+
+document
+    .getElementById("applicationDate")
+    .addEventListener(
+        "change",
+        function () {
+
+            this.classList.remove(
+                "input-error"
+            );
+
+        }
+    );
+
+
+
+/* START APPLICATION */
 
 loadApplications();
 
