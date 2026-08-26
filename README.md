@@ -135,6 +135,15 @@ The application will start on:
 ```text
 http://localhost:8080
 ```
+## 📸 Screenshots
+
+### Dashboard
+
+![Job Application Tracker Dashboard](screenshots/dashboard.png)
+
+### Applications
+
+![Job Application Tracker Applications](screenshots/applications.png)
 
 ## 🔗 Project Repository
 
