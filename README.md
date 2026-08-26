@@ -85,7 +85,7 @@ jobtracker
 │   │   │
 │   │   └── resources
 │   │       ├── static
-│   │       └── application.properties
+│   │       └── application.properties.example
 │   │
 │   └── test
 │
